@@ -729,6 +729,8 @@ ej_ejecutar_guardar_fallos() {
     local marco=""
     local mom=$(( ${pc[$enEjecucion]} - 1 ))
 
+    #Esta parte del codigo esta diseñado para que en caso de que se encuentre un proceso que ha sufrido SRPT, lo detecte y reintroduzca los paginas solo para mostrar la tablla, ya que sin ello veras que sale sin nada aquellos marcos que si que se han ya introducidos antes de sacar el proceso de Ejecucion. 
+
     # # Determina la pagina que se esta ejecutando
     # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
     #     mom=0

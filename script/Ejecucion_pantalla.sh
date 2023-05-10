@@ -497,9 +497,12 @@ ej_pantalla_fin_fallos() {
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
             
+                # El problema esta aqui que es donde hace la impresion de donde ha introducido la pagina pintandola y es lo que falla
+
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
 
+                # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
                 # Este es el apuntador donde se introduce el siguiente marco
                 # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
                 #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
