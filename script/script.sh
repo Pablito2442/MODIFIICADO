@@ -729,32 +729,34 @@ ej_ejecutar_guardar_fallos() {
     local marco=""
     local mom=$(( ${pc[$enEjecucion]} - 1 ))
 
-    #Esta parte del codigo esta diseñado para que en caso de que se encuentre un proceso que ha sufrido SRPT, lo detecte y reintroduzca los paginas solo para mostrar la tablla, ya que sin ello veras que sale sin nada aquellos marcos que si que se han ya introducidos antes de sacar el proceso de Ejecucion. 
-
-    # # Determina la pagina que se esta ejecutando
-    # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
-    #     mom=0
-
-    #     # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
-    #     for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
-
-    #         for mar in ${!marcosActuales[*]};do
-    #             # Valor de aquellos marcos que esten siendo utilizados por el proceso en ejecucion
-    #             marco=${marcosActuales[$mar]}
-    #             # Posicion en la que se ha introducido 
-    #             resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-    #             resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
-    #         done
-
-    #     done
-    #     algoritmo_srtp[$enEjecucion]=1
-    # fi
-
     for mar in ${!marcosActuales[*]};do
         marco=${marcosActuales[$mar]}
         resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
         resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
     done
+
+    # Reintroduccion de paginas en caso de haber sido sacado por el algoritmo SRPT
+    if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
+        mom=0
+
+        # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
+        for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
+
+            for mar in ${!marcosActuales[*]};do
+                # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
+                if [[ ${marcosActuales[$mar]} -eq $mom ]];then
+                    marco=${marcosActuales[$mar]}
+                    # Posicion en la que se ha introducido 
+                    for ((i=0;i<$((${pc[$enEjecucion]}-1));i++)); do
+                        resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
+                        resumenFIFO["$((mom+i)),$mar"]="${memoriaFIFO[$marco]}"
+                    done
+                fi
+            done
+
+        done
+        algoritmo_srtp[$enEjecucion]=1
+    fi
 
 }
 

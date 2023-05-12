@@ -502,6 +502,28 @@ ej_pantalla_fin_fallos() {
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
 
+                    # Puede funcionar para la impresion en los casos de SRPT
+
+                    # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
+                    #     mom=0
+
+                    #     # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
+                    #     for (( mom=0; mom<$ultimoMomento; mom++ ));do
+
+                    #         for mar in ${!marcosActuales[*]};do
+                    #             # Valor de aquellos marcos que esten siendo utilizados por el proceso en ejecucion
+                    #             if [[ ${marcosActuales[$mar]} -eq $mom ]];then
+                    #                 marco=${marcosActuales[$mar]}
+                    #                 printf "${cf[4]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
+        
+                    #             fi
+                    #         done
+
+                    #     done
+                    #     algoritmo_srtp[$enEjecucion]=1  
+                    # fi
+
+
                 # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
                 # Este es el apuntador donde se introduce el siguiente marco
                 # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
@@ -597,41 +619,54 @@ ej_pantalla_informacion() {
     echo -e " "
     echo -e " "
 
-    echo -e "El valor de la variable primerMomento es de: ${holatest}"
-
-    # echo -e "El valor de la variable algoirtmo es de: ${algoritmo_srtp[@]}"
-    # echo -e "El valor de la variable algoirtmo de enEjecucion es de: ${algoritmo_srtp[$enEjecucion]}"
-
-    # echo -e " "
-    # echo -e " "
-
-    # echo -e "El valor de la variable marcoFallo de mom es de: ${marcoFallo[$(( ${pc[$enEjecucion]} - 1 ))]}"
-    # echo -e "El valor de la variable mom es de: $(( ${pc[$enEjecucion]} - 1 ))"
-
-    # echo -e " "
-    # echo -e " "
-
-    # local mar=""
+    # local marco=""
     # local mom=$(( ${pc[$enEjecucion]} - 1 ))
-    # local primerMomento=0
-    # local ultimoMomento=""
+    # echo -e "La variable mom tiene ${mom}"
 
+    # echo -e " "
+    # echo -e " "
 
-    #     if [ $ultimoMomento -ge ${tiempoEjecucion[$fin]} ];then
-    #         ultimoMomento=$(( ${tiempoEjecucion[$fin]} - 1 ))
-    #     fi
+    # for mar in ${!marcosActuales[*]};do
+    #     marco=${marcosActuales[$mar]}
+    #     echo -e "La variable marco tiene ${marco}"
+    #     resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
+    #     echo -e "La variable resumenFallos tiene ${memoriaPagina[$marco]}"
+    #     resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
+    #     echo -e "La variable memoriaFIFO tiene ${memoriaFIFO}"
+    # done
 
-    # # Imprimir la evolución de cada marco
-    #     for (( mar=0; mar<${minimoEstructural[$fin]}; mar++ ));do
+    # echo -e " "
+    # echo -e " "
+    # echo -e " "
+    # echo -e " "
 
-    #         for (( mom=$primerMomento; mom<=$ultimoMomento; mom++ ));do
-    #             if [ ${marcoFallo[$mom]} -eq $mar ];then
-    #                echo -e "La variable marcoFallo es: ${marcoFallo[$mom]}"
-    #                echo -e "La variable marcoFallo es: ${mar}"
+    # # Determina la pagina que se esta ejecutando
+    # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
+    #     mom=0
 
+    #     # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
+    #     for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
+    #     echo -e "La variable mom tiene ${mom}"
+
+    #         for mar in ${!marcosActuales[*]};do
+    #         echo -e "La variable marcosActuales tiene ${!marcosActuales[*]}"
+    #             # Valor de aquellos marcos que esten siendo utilizados por el proceso en ejecucion
+    #             marco=${marcosActuales[$mar]}
+    #             echo -e "La variable marco tiene ${marco}"
+
+    #             if [[ ${marcosActuales[$mar]} -eq $mom ]];then
+    #                 # Posicion en la que se ha introducido 
+    #                 resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
+    #                 echo -e "La variable resumenFallos tiene ${resumenFallos}"
+    #                 resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
+    #                 echo -e "La variable resumenFIFO tiene ${resumenFIFO}"
     #             fi
     #         done
+
     #     done
+    #     algoritmo_srtp[$enEjecucion]=1
+    # fi
+
 
 }
 
@@ -1160,6 +1195,7 @@ ej_limpiar_eventos() {
     if [[ -n "${fin}" ]];then
         resumenFallos=()
         resumenFIFO=()
+    
         # Por si entra un proceso a la vez que sale
         local corte=${tiempoEjecucion[$fin]}
         marcoFallo=(${marcoFallo[@]:$corte})
