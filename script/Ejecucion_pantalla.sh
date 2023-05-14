@@ -498,9 +498,7 @@ ej_pantalla_fin_fallos() {
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
 
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
-                    printf "${cf[0]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
-            
-                # # El problema esta aqui que es donde hace la impresion de donde ha introducido la pagina pintandola y es lo que falla"  
+                    printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
 
                 # # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
                 # # Este es el apuntador donde se introduce el siguiente marco
@@ -1143,13 +1141,6 @@ ej_limpiar_eventos() {
         marcoFallo=(${marcoFallo[@]:$corte})
         fin=""
     fi
-
-    # Si ha pausado un proceso
-    if [[ -n $pausa ]];then
-        resumenFallos=()
-        resumenFIFO=()
-        pausa=""
-    fi
 }
 
 
@@ -1350,7 +1341,6 @@ ej() {
     local matriz_fallos=()          #ESTE LO QUITAS
     local salida_memoria=""         # Proceso que ha salido de memoria
     local fin=""                    # Proceso que ha finalizado su ejecución
-    local pausa=""                  # Proceso que ha entrado en pausa
 
     declare -A resumenFallos        # Contiene información de los fallos de página que han habido durante la ejecución del proceso
                                     # se muestra cuando un proceso finaliza su ejecución. resumenFallos[$momento,$marco]

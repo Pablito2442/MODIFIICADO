@@ -618,7 +618,6 @@ ej_ejecutar_sacar_ejecucion(){
 
     # Poner el proceso que se ha salido de ejecucion para mostrarlo en la pantalla
     salida_ejecucion=($enEjecucion)
-    pausa=$enEjecucion
 
     # Cambiamos el estado
     estado[$enEjecucion]=5
