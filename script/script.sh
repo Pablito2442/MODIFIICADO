@@ -29,8 +29,8 @@ source Inicializacion.sh
 
 #Preguntar por si hay alguna forma diferente de hacerlo:
 
-    # Muestra la cabecera con datos relevantes
-    intro_cabecera_inicio() {
+# Muestra la cabecera con datos relevantes
+intro_cabecera_inicio() {
 
         # Cabecera que se muestra por pantalla
         clear
@@ -135,10 +135,10 @@ source Inicializacion.sh
 
         pausa_tecla
 
-    }
+}
 
-    # Muestra la cabecera con aviso sobre el tamaño de la terminal
-    intro_cabecera_tamano() {
+# Muestra la cabecera con aviso sobre el tamaño de la terminal
+intro_cabecera_tamano() {
 
         clear
         echo -e        "${cf[$ac]}                                                 ${rstf}"
@@ -189,13 +189,13 @@ source Inicializacion.sh
         
         pausa_tecla
 
-    }
+}
 
-    # Se muestran las cabeceras
-    intro() {
-        intro_cabecera_inicio
-        intro_cabecera_tamano
-    }
+# Se muestran las cabeceras
+intro() {
+    intro_cabecera_inicio
+    intro_cabecera_tamano
+}
 
 # ███████████████████████████████
 # █                             █
@@ -618,6 +618,7 @@ ej_ejecutar_sacar_ejecucion(){
 
     # Poner el proceso que se ha salido de ejecucion para mostrarlo en la pantalla
     salida_ejecucion=($enEjecucion)
+
 
     # Cambiamos el estado
     estado[$enEjecucion]=5

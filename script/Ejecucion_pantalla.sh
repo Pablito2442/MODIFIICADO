@@ -593,21 +593,8 @@ ej_pantalla_inicio() {
 
 # DES: ESTO LUEGO LO QUITAS
 ej_pantalla_informacion() {
-    
-    echo -e "La variable pausa tiene: $pausa"
     echo -e " "
     echo -e " "
-
-    if [[ -n ${algoritmo_srtp[$enEjecucion]} ]];then
-        echo -e "Aqui tiene que hacerse los fallos por el SRPT"
-    fi
-
-    echo -e " "
-    echo -e " "
-
-    # echo -e "Aqui tiene que hacerse los fallos por el SRPT"
-    # echo -e "La variable algoritmo mom tiene $(( ${pc[$enEjecucion]} - 1 ))"
-
 }
 
 # DES: Mostrar el proceso que ha parado su ejecución
