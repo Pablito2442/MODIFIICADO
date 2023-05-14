@@ -499,10 +499,8 @@ ej_pantalla_fin_fallos() {
             printf "${ft[0]}"
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-
                 if [[ $mar -eq $((mom % minimoEstructural[$fin])) ]];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
-                    
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
@@ -521,7 +519,6 @@ ej_pantalla_fin_fallos() {
             printf "%${anchoEtiquetas}s" ""
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-                #if [[ ${marcoFallo[$mar]} -eq $mar ]];then
                 if [[ $mar -eq $((mom % minimoEstructural[$fin])) ]];then
                     printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 else
