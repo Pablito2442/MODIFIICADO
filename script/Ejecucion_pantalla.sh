@@ -496,42 +496,22 @@ ej_pantalla_fin_fallos() {
             printf "${ft[0]}"
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-            
-                # El problema esta aqui que es donde hace la impresion de donde ha introducido la pagina pintandola y es lo que falla
 
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
-                    printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
+                    printf "${cf[0]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
+            
+                # # El problema esta aqui que es donde hace la impresion de donde ha introducido la pagina pintandola y es lo que falla"  
 
-                    # Puede funcionar para la impresion en los casos de SRPT
-
-                    # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
-                    #     mom=0
-
-                    #     # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
-                    #     for (( mom=0; mom<$ultimoMomento; mom++ ));do
-
-                    #         for mar in ${!marcosActuales[*]};do
-                    #             # Valor de aquellos marcos que esten siendo utilizados por el proceso en ejecucion
-                    #             if [[ ${marcosActuales[$mar]} -eq $mom ]];then
-                    #                 marco=${marcosActuales[$mar]}
-                    #                 printf "${cf[4]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
-        
-                    #             fi
-                    #         done
-
-                    #     done
-                    #     algoritmo_srtp[$enEjecucion]=1  
-                    # fi
-
-
-                # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
-                # Este es el apuntador donde se introduce el siguiente marco
-                # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
-                #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
+                # # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
+                # # Este es el apuntador donde se introduce el siguiente marco
+                # # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
+                # #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
 
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
+
+
             done
             printf "${rstf}\n"
             printf "%${anchoEtiquetas}s" ""
@@ -616,57 +596,19 @@ ej_pantalla_inicio() {
 # DES: ESTO LUEGO LO QUITAS
 ej_pantalla_informacion() {
     
+    echo -e "La variable pausa tiene: $pausa"
     echo -e " "
     echo -e " "
 
-    # local marco=""
-    # local mom=$(( ${pc[$enEjecucion]} - 1 ))
-    # echo -e "La variable mom tiene ${mom}"
+    if [[ -n ${algoritmo_srtp[$enEjecucion]} ]];then
+        echo -e "Aqui tiene que hacerse los fallos por el SRPT"
+    fi
 
-    # echo -e " "
-    # echo -e " "
+    echo -e " "
+    echo -e " "
 
-    # for mar in ${!marcosActuales[*]};do
-    #     marco=${marcosActuales[$mar]}
-    #     echo -e "La variable marco tiene ${marco}"
-    #     resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-    #     echo -e "La variable resumenFallos tiene ${memoriaPagina[$marco]}"
-    #     resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
-    #     echo -e "La variable memoriaFIFO tiene ${memoriaFIFO}"
-    # done
-
-    # echo -e " "
-    # echo -e " "
-    # echo -e " "
-    # echo -e " "
-
-    # # Determina la pagina que se esta ejecutando
-    # if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
-    #     mom=0
-
-    #     # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
-    #     for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
-    #     echo -e "La variable mom tiene ${mom}"
-
-    #         for mar in ${!marcosActuales[*]};do
-    #         echo -e "La variable marcosActuales tiene ${!marcosActuales[*]}"
-    #             # Valor de aquellos marcos que esten siendo utilizados por el proceso en ejecucion
-    #             marco=${marcosActuales[$mar]}
-    #             echo -e "La variable marco tiene ${marco}"
-
-    #             if [[ ${marcosActuales[$mar]} -eq $mom ]];then
-    #                 # Posicion en la que se ha introducido 
-    #                 resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-    #                 echo -e "La variable resumenFallos tiene ${resumenFallos}"
-    #                 resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
-    #                 echo -e "La variable resumenFIFO tiene ${resumenFIFO}"
-    #             fi
-    #         done
-
-    #     done
-    #     algoritmo_srtp[$enEjecucion]=1
-    # fi
-
+    # echo -e "Aqui tiene que hacerse los fallos por el SRPT"
+    # echo -e "La variable algoritmo mom tiene $(( ${pc[$enEjecucion]} - 1 ))"
 
 }
 
@@ -1201,6 +1143,13 @@ ej_limpiar_eventos() {
         marcoFallo=(${marcoFallo[@]:$corte})
         fin=""
     fi
+
+    # Si ha pausado un proceso
+    if [[ -n $pausa ]];then
+        resumenFallos=()
+        resumenFIFO=()
+        pausa=""
+    fi
 }
 
 
@@ -1401,8 +1350,8 @@ ej() {
     local matriz_fallos=()          #ESTE LO QUITAS
     local salida_memoria=""         # Proceso que ha salido de memoria
     local fin=""                    # Proceso que ha finalizado su ejecución
+    local pausa=""                  # Proceso que ha entrado en pausa
 
-    local resumenFallosPrevios=()  # Contiene los fallos antes de mandarlos al finalizar 
     declare -A resumenFallos        # Contiene información de los fallos de página que han habido durante la ejecución del proceso
                                     # se muestra cuando un proceso finaliza su ejecución. resumenFallos[$momento,$marco]
     declare -A resumenFIFO           # Contiene el estado del contador para cada marco en cada momento

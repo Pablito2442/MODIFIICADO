@@ -618,6 +618,7 @@ ej_ejecutar_sacar_ejecucion(){
 
     # Poner el proceso que se ha salido de ejecucion para mostrarlo en la pantalla
     salida_ejecucion=($enEjecucion)
+    pausa=$enEjecucion
 
     # Cambiamos el estado
     estado[$enEjecucion]=5
@@ -729,25 +730,24 @@ ej_ejecutar_guardar_fallos() {
     local marco=""
     local mom=$(( ${pc[$enEjecucion]} - 1 ))
 
-    for mar in ${!marcosActuales[*]};do
-        marco=${marcosActuales[$mar]}
-        resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-        resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
-    done
+    if [[ -z ${algoritmo_srtp[$enEjecucion]} ]];then 
+        for mar in ${!marcosActuales[*]};do
+            marco=${marcosActuales[$mar]}
+            resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
+            resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
+        done
 
-    # Reintroduccion de paginas en caso de haber sido sacado por el algoritmo SRPT
-    if [[ ${algoritmo_srtp[$enEjecucion]} -eq 0 ]];then
+    else
         mom=0
-
         # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
         for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
 
             for mar in ${!marcosActuales[*]};do
                 # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
-                if [[ ${marcosActuales[$mar]} -eq $mom ]];then
+                if [[ $mar -eq $mom ]];then
                     marco=${marcosActuales[$mar]}
-                    # Posicion en la que se ha introducido 
-                    for ((i=0;i<$((${pc[$enEjecucion]}-1));i++)); do
+                    Posicion en la que se ha introducido 
+                    for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
                         resumenFIFO["$((mom+i)),$mar"]="${memoriaFIFO[$marco]}"
                     done
@@ -755,7 +755,7 @@ ej_ejecutar_guardar_fallos() {
             done
 
         done
-        algoritmo_srtp[$enEjecucion]=1
+        unset algoritmo_srtp[$enEjecucion]
     fi
 
 }
