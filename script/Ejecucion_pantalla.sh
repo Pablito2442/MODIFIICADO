@@ -486,6 +486,9 @@ ej_pantalla_fin_fallos() {
         done
         printf "\n"
 
+
+
+
         # Imprimir la evolución de cada marco
         for (( mar=0; mar<${minimoEstructural[$fin]}; mar++ ));do
             # Etiqueta del marco
@@ -497,17 +500,20 @@ ej_pantalla_fin_fallos() {
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
 
-                if [ ${marcoFallo[$mom]} -eq $mar ];then
+                if [[ $((mar % minimoEstructural[$fin])) -eq $mom ]];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
+                    
+                else
+                    printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
+                fi
 
+            
                 # # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
                 # # Este es el apuntador donde se introduce el siguiente marco
                 # # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
                 # #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
 
-                else
-                    printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
-                fi
+
 
 
             done
@@ -515,7 +521,8 @@ ej_pantalla_fin_fallos() {
             printf "%${anchoEtiquetas}s" ""
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-                if [[ ${marcoFallo[$mom]} -eq $mar ]];then
+                #if [[ ${marcoFallo[$mar]} -eq $mar ]];then
+                if [[ $mar -eq $mom ]];then
                     printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 else
                     printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
