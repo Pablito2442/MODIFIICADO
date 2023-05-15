@@ -499,8 +499,9 @@ ej_pantalla_fin_fallos() {
             printf "${ft[0]}"
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-                if [[ $mar -eq $((mom % minimoEstructural[$fin])) ]];then
-                    printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}" 
+
+                if [ ${marcoFallo[$((mom % minimoEstructural[$fin]))]} -eq $mar ];then
+                        printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
@@ -519,7 +520,7 @@ ej_pantalla_fin_fallos() {
             printf "%${anchoEtiquetas}s" ""
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-                if [[ $mar -eq $((mom % minimoEstructural[$fin])) ]];then
+                if [ ${marcoFallo[$((mom % minimoEstructural[$fin]))]} -eq $mar ];then
                     printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 else
                     printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
@@ -535,6 +536,7 @@ ej_pantalla_fin_fallos() {
         anchoRestante=$(( $anchoTotal - $anchoEtiquetas ))
 
     done
+    numfallosAntes=${numfallos[$enEjecucion]}
 }
 
 # DES: Mostrar el proceso que ha finalizado su ejecución
@@ -599,6 +601,19 @@ ej_pantalla_inicio() {
 ej_pantalla_informacion() {
     echo -e " "
     echo -e " "
+
+    # for (( mar=0; mar<4; mar++ ));do
+    #     for (( mom=0; mom<=6; mom++ ));do
+    #         if [ ${marcoFallo[$mom]} -eq $mar ];then
+    #             echo -e "Ha entrado en la opcion"
+    #         echo -e "La variable marcoFallo de mom tiene: ${marcoFallo[$mom]}"
+    #         echo -e "La variable mar tiene: $mar"
+    #         fi
+    #     done
+    # done
+
+    echo -e "La variable marcoFallo tiene: ${marcoFallo[*]}"
+    # echo -e "La variable numfallos tiene: ${numfallos[$enEjecucion]}"
 }
 
 # DES: Mostrar el proceso que ha parado su ejecución
@@ -1114,7 +1129,6 @@ ej_limpiar_eventos() {
     # No seguir mostrando la pantalla
     mostrarPantalla=0
     reubicacion=0
-    holatest=0 #Esta linea luego la quitas
 
     llegada=()
     entrada=()
@@ -1126,14 +1140,14 @@ ej_limpiar_eventos() {
     if [[ -n "${fin}" ]];then
         resumenFallos=()
         resumenFIFO=()
-    
+        numfallosAntes=0
+        
         # Por si entra un proceso a la vez que sale
         local corte=${tiempoEjecucion[$fin]}
         marcoFallo=(${marcoFallo[@]:$corte})
         fin=""
     fi
 }
-
 
 # DES: Muestra un resumen de lo que ha pasado
 ej_resumen() {
@@ -1339,6 +1353,7 @@ ej() {
     declare -A paginaTiempo         # Contiene el tiempo en el que se introduce cada página del proceso [$proc,$pc]
     local marcoFallo=()             # Marco que se usa para cada página
     local numFallos=()              # Número de fallos de cada proceso
+    local numFallosAntes=0
     for p in ${procesos[*]};do numFallos[$p]=0 ;done
 
     # Variables para la linea temporal

@@ -619,6 +619,15 @@ ej_ejecutar_sacar_ejecucion(){
     # Poner el proceso que se ha salido de ejecucion para mostrarlo en la pantalla
     salida_ejecucion=($enEjecucion)
 
+    # Para arreglarlo podemos en caso de proceso en pausa, simplemente reordenar la lista de marco fallo mandando todos aquellos marcos del proceso anterior al final.
+
+    local corte=${tRet[$enEjecucion]}
+    local marcoFalloIntermedio=()
+    for ((i=0; i<=$corte; i++));do
+        marcoFalloIntermedio+=${marcoFallo[i]}
+    done
+    marcoFallo=(${marcoFallo[@]:$corte})
+    marcoFallo+=("${marcoFalloIntermedio[@]}")
 
     # Cambiamos el estado
     estado[$enEjecucion]=5
@@ -746,7 +755,7 @@ ej_ejecutar_guardar_fallos() {
                 # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
                 if [[ $mar -eq $mom ]];then
                     marco=${marcosActuales[$mar]}
-                    Posicion en la que se ha introducido 
+                    # Posicion en la que se ha introducido 
                     for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
                         resumenFIFO["$((mom+i)),$mar"]="${memoriaFIFO[$marco]}"
