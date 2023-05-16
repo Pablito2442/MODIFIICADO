@@ -622,12 +622,8 @@ ej_ejecutar_sacar_ejecucion(){
     # Para arreglarlo podemos en caso de proceso en pausa, simplemente reordenar la lista de marco fallo mandando todos aquellos marcos del proceso anterior al final.
 
     local corte=${tRet[$enEjecucion]}
-    local marcoFalloIntermedio=()
-    for ((i=0; i<=$corte; i++));do
-        marcoFalloIntermedio+=${marcoFallo[i]}
-    done
     marcoFallo=(${marcoFallo[@]:$corte})
-    marcoFallo+=("${marcoFalloIntermedio[@]}")
+
 
     # Cambiamos el estado
     estado[$enEjecucion]=5
@@ -748,6 +744,8 @@ ej_ejecutar_guardar_fallos() {
 
     else
         mom=0
+        marcoFallo=(${marcoFallo[@]:1})
+
         # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
         for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
 
@@ -755,11 +753,19 @@ ej_ejecutar_guardar_fallos() {
                 # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
                 if [[ $mar -eq $mom ]];then
                     marco=${marcosActuales[$mar]}
+                    #Este de aqui solo nos lo coloca de forma descendente indiferentemente de si hay marco o no.
+
+                    
+                    # marcoFallo+=($mar)
+
                     # Posicion en la que se ha introducido 
                     for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
                         resumenFIFO["$((mom+i)),$mar"]="${memoriaFIFO[$marco]}"
                     done
+                    if [[ -n $resumenFallos["$mom,$mar"] ]];then
+                        marcoFallo+=($mar)
+                    fi
                 fi
             done
 

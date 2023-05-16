@@ -74,14 +74,10 @@ El archivo de datos usado es: muestra_SRPT.txt
 █████████████████████████████████████████████████
 
  Ref Tll Tej nMar Dirección - Página
- P01   2  10    4 323-6 412-8 765-15 891-17 654-13 454-9 124-2 462-9 456-9 875-17
- P02   4   8    4 323-6 412-8 765-15 891-17 654-13 454-9 762-15 112-2
- P03   6   6    4 323-6 412-8 765-15 891-17 654-13 454-9
- P04   8   4    4 323-6 412-8 765-15 891-17
- P05  10   2    4 123-2 542-10
- P08  11  10    4 323-6 412-8 765-15 891-17 654-13 454-9 124-2 462-9 456-9 875-17
- P06  13  10    4 323-6 412-8 765-15 891-17 654-13 454-9 124-2 462-9 456-9 875-17
- P07  14  10    4 323-6 412-8 765-15 891-17 654-13 454-9 124-2 462-9 456-9 875-17
+ P01   3  11    4 323-6 784-15 412-8 120-2 891-17 654-13 454-9 124-2 462-9 456-9 546-10
+ P02   6   7    4 323-6 815-16 765-15 891-17 654-13 454-9 423-8
+ P03   8   5    4 323-6 384-7 541-10 891-17 892-17
+ P04  10   2    4 123-2 542-10
 
 ¿Cómo quieres ejecutar el algoritmo?
 --->[1] <- Mostrar los eventos interesantes
@@ -92,20 +88,12 @@ El archivo de datos usado es: muestra_SRPT.txt
  SRPT-Paginación-FIFO-NC-R
  T: 0      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 
- P05  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
+ P01   3  11    4    -    -    -    -    - Fuera de sist.  323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    -    -    -    -    - Fuera de sist.  323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    -    -    -    -    - Fuera de sist.  323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
  TespM: 0.00      TretM: 0.00
             ██                                                                            ██
    Proceso: █[NADA                                                                         █
@@ -130,25 +118,17 @@ El archivo de datos usado es: muestra_SRPT.txt
 La variable marcoFallo tiene: 
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
- T: 2      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ T: 3      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
  Ha llegado el proceso P01.
  El proceso P01 ha entrado a memoria a partir de la posición 0.
  El proceso P01 ha iniciado su ejecución.
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    0    0  10     0    3 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 
- P05  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
+ P01   3  11    4    0    0  11     0    3 En ejecución    323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    -    -    -    -    - Fuera de sist.  323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    -    -    -    -    - Fuera de sist.  323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
  TespM: 0.00      TretM: 0.00
             ██                                                                            ██
    Proceso: █[P01                   ][NADA                                                 █
@@ -165,40 +145,32 @@ La variable marcoFallo tiene:
      |P01                                                         |
  BM: |  6  -  -  -                                                | M:20
      |  0           4                                             |
-     |      P01|
- BT: |        6| T:2
-     |  0     2|
+     |         P01|
+ BT: |           6| T:3
+     |  0        3|
  
  
 La variable marcoFallo tiene: 0
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
- T: 4      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ T: 6      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
  Ha llegado el proceso P02.
  El proceso P02 ha entrado a memoria a partir de la posición 4.
  El proceso P02 ha iniciado su ejecución.
  Cola Ejecucion (Orden ejecución por SRPT): P01
  El proceso P01 ha parado su ejecucion.
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    0    2   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    0    0   8     4    7 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 
- P05  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 0.00      TretM: 1.00
+ P01   3  11    4    0    3   8     0    3 En Pausa        323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    0    0   7     4    7 En ejecución    323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    -    -    -    -    - Fuera de sist.  323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
+ TespM: 0.00      TretM: 1.50
             ██                                                                            ██
    Proceso: █[P01                   ][P02                   ][NADA                         █
   Nº Marco: █[   0][   1][   2][   3][   4](   5)[   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6](    )[    ][    ][    ][    ][    ][    ][    ]█
+    Página: █[   6][  15][   8][    ][   6](    )[    ][    ][    ][    ][    ][    ][    ]█
  Apuntador: █[   -][   -][   -][   -][   -](   1)[   -][   -][   -][   -][   -][   -][   -]█
             ██                                                                            ██
             ██                                        ██
@@ -208,42 +180,34 @@ La variable marcoFallo tiene: 0
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
             ██                                        ██
      |P01         P02                                             |
- BM: |  6  8  -  -  6  -  -  -                                    | M:20
+ BM: |  6 15  8  -  6  -  -  -                                    | M:20
      |  0           4           8                                 |
-     |      P01   P02|
- BT: |        6  8  6| T:4
-     |  0     2     4|
+     |         P01      P02|
+ BT: |           6 15  8  6| T:6
+     |  0        3        6|
  
  
-La variable marcoFallo tiene: 01 0
+La variable marcoFallo tiene: 0
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
- T: 6      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ T: 8      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
  Ha llegado el proceso P03.
  El proceso P03 ha entrado a memoria a partir de la posición 8.
  El proceso P03 ha iniciado su ejecución.
  Cola Ejecucion (Orden ejecución por SRPT): P02 P01
  El proceso P02 ha parado su ejecucion.
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    2    4   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    0    2   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    0    0   6     8   11 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 
- P05  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: .66       TretM: 2.00
+ P01   3  11    4    2    5   8     0    3 En Pausa        323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    0    2   5     4    7 En Pausa        323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    0    0   5     8   11 En ejecución    323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
+ TespM: .66       TretM: 2.33
             ██                                                                            ██
    Proceso: █[P01                   ][P02                   ][P03                   ][NADA █
   Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8](   9)[  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6](    )[    ][    ][    ]█
+    Página: █[   6][  15][   8][    ][   6][  16][    ][    ][   6](    )[    ][    ][    ]█
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -](   1)[   -][   -][   -]█
             ██                                                                            ██
             ██                                        ██
@@ -253,42 +217,34 @@ La variable marcoFallo tiene: 01 0
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
             ██                                        ██
      |P01         P02         P03                                 |
- BM: |  6  8  -  -  6  8  -  -  6  -  -  -                        | M:20
+ BM: |  6 15  8  -  6 16  -  -  6  -  -  -                        | M:20
      |  0           4           8          12                     |
-     |      P01   P02   P03|
- BT: |        6  8  6  8  6| T:6
-     |  0     2     4     6|
+     |         P01      P02   P03|
+ BT: |           6 15  8  6 16  6| T:8
+     |  0        3        6     8|
  
  
-La variable marcoFallo tiene: 1 0101 0
+La variable marcoFallo tiene: 0
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
- T: 8      Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ T: 10     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
  Ha llegado el proceso P04.
  El proceso P04 ha entrado a memoria a partir de la posición 12.
  El proceso P04 ha iniciado su ejecución.
  Cola Ejecucion (Orden ejecución por SRPT): P03 P02 P01
  El proceso P03 ha parado su ejecucion.
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    4    6   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    2    4   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    0    2   4     8   11 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    0    0   4    12   15 En ejecución    323-6 412-8 765-15 891-17 
- P05  10   2    4    -    -    -    -    - Fuera de sist.  123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 1.50      TretM: 3.00
+ P01   3  11    4    4    7   8     0    3 En Pausa        323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    2    4   5     4    7 En Pausa        323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    0    2   3     8   11 En Pausa        323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    0    0   2    12   15 En ejecución    123-2 542-10 
+ TespM: 1.50      TretM: 3.25
             ██                                                                            ██
    Proceso: █[P01                   ][P02                   ][P03                   ][P04  █
   Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][    ][    ][   6]█
+    Página: █[   6][  15][   8][    ][   6][  16][    ][    ][   6][   7][    ][    ][   2]█
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
             ██                                                                            ██
             ██                                        ██
@@ -298,588 +254,42 @@ La variable marcoFallo tiene: 1 0101 0
  Apuntador: █(   1)[   -][   -][   -][   -][   -][   -]█
             ██                                        ██
      |P01         P02         P03         P04                     |
- BM: |  6  8  -  -  6  8  -  -  6  8  -  -  6  -  -  -            | M:20
+ BM: |  6 15  8  -  6 16  -  -  6  7  -  -  2  -  -  -            | M:20
      |  0           4           8          12          16         |
-     |      P01   P02   P03   P04|
- BT: |        6  8  6  8  6  8  6| T:8
-     |  0     2     4     6     8|
+     |         P01      P02   P03   P04|
+ BT: |           6 15  8  6 16  6  7  2| T:10
+     |  0        3        6     8    10|
  
  
-La variable marcoFallo tiene: 0 1 101010 0
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 10     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- Ha llegado el proceso P05.
- El proceso P05 ha entrado a memoria a partir de la posición 16.
- El proceso P05 ha iniciado su ejecución.
- Cola Ejecucion (Orden ejecución por SRPT): P04 P03 P02 P01
- El proceso P04 ha parado su ejecucion.
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    6    8   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    4    6   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    2    4   4     8   11 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    0    2   2    12   15 En Pausa        323-6 412-8 765-15 891-17 
- P05  10   2    4    0    0   2    16   19 En ejecución    123-2 542-10 
- P08  11  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 2.40      TretM: 4.00
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P03                   ][P04  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][    ][    ][   6]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P05                   ]█
-  Nº Marco: █[  13][  14][  15][  16](  17)[  18][  19]█
-    Página: █[   8][    ][    ][   2](    )[    ][    ]█
- Apuntador: █[   -][   -][   -][   -](   1)[   -][   -]█
-            ██                                        ██
-     |P01         P02         P03         P04         P05         |
- BM: |  6  8  -  -  6  8  -  -  6  8  -  -  6  8  -  -  2  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05|
- BT: |        6  8  6  8  6  8  6  8  2| T:10
-     |  0     2     4     6     8    10|
- 
- 
-La variable marcoFallo tiene: 101010 0 1 01101010 0
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 11     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- Ha llegado el proceso P08.
- Cola Memoria(Orden entrada en memoria por FIFO): P08
- Cola Ejecucion (Orden ejecución por SRPT): P04 P03 P02 P01
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    7    9   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    5    7   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    3    5   4     8   11 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    1    3   2    12   15 En Pausa        323-6 412-8 765-15 891-17 
- P05  10   2    4    0    1   1    16   19 En ejecución    123-2 542-10 
- P08  11  10    4    0    0    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 2.66      TretM: 4.16
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P03                   ][P04  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][    ][    ][   6]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P05                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17](  18)[  19]█
-    Página: █[   8][    ][    ][   2][  10](    )[    ]█
- Apuntador: █[   -][   -][   -][   -][   -](   1)[   -]█
-            ██                                        ██
-     |P01         P02         P03         P04         P05         |
- BM: |  6  8  -  -  6  8  -  -  6  8  -  -  6  8  -  -  2 10  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   |
- BT: |        6  8  6  8  6  8  6  8  2 10| T:11
-     |  0     2     4     6     8    10   |
- 
- 
-La variable marcoFallo tiene: 101010 0 1 01101010 0 1
+La variable marcoFallo tiene: 0
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
  T: 12     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P04 ha iniciado su ejecución.
- Cola Memoria(Orden entrada en memoria por FIFO): P08
- Cola Ejecucion (Orden ejecución por SRPT): P03 P02 P01
+ El proceso P03 ha iniciado su ejecución.
+ Cola Ejecucion (Orden ejecución por SRPT): P02 P01
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    8   10   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    6    8   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    4    6   4     8   11 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    4   2    12   15 En ejecución    323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    1    1    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 3.50      TretM: 5.16
- El proceso P05 ha finalizado su ejecución con 2 fallos de página.
+ P01   3  11    4    6    9   8     0    3 En Pausa        323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    4    6   5     4    7 En Pausa        323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    2    4   3     8   11 En ejecución    323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    0    2   -    12   15 Finalizado      123-2 542-10 
+ TespM: 3.00      TretM: 5.25
+ El proceso P04 ha finalizado su ejecución con 2 fallos de página.
   T: (10)(11)
- M0: ┌ 2┐╔ 2╗
-     └10┘╚10╝
- M1: ┌  ┐┌10┐
-     └  ┘└11┘
+ M0: ╔ 2╗┌ 2┐
+     ╚10╝└10┘
+ M1: ┌  ┐╔10╗
+     └  ┘╚11╝
  M2: ┌  ┐┌  ┐
      └  ┘└  ┘
  M3: ┌  ┐┌  ┐
      └  ┘└  ┘
             ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P03                   ][P04  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][    ][    ][   6]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][NADA                  ]█
-  Nº Marco: █[  13][  14](  15)[  16][  17][  18][  19]█
-    Página: █[   8][  15](    )[    ][    ][    ][    ]█
- Apuntador: █[   -][   -](   1)[   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02         P03         P04                     |
- BM: |  6  8  -  -  6  8  -  -  6  8  -  -  6  8 15  -            | M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04|
- BT: |        6  8  6  8  6  8  6  8  2 10 15| T:12
-     |  0     2     4     6     8    10    12|
- 
- 
-La variable marcoFallo tiene: 101010 0 1 01101010 0 1 2
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 13     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- Ha llegado el proceso P06.
- El proceso P08 ha entrado a memoria a partir de la posición 16.
- Cola Memoria(Orden entrada en memoria por FIFO): P06
- Cola Ejecucion (Orden ejecución por SRPT): P03 P02 P01 P08
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4    9   11   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    7    9   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    5    7   4     8   11 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    5   1    12   15 En ejecución    323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    2    2  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    0    0    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    -    -    -    -    - Fuera de sist.  323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 3.57      TretM: 5.14
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P03                   ][P04  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11](  12)█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][    ][    ](   6)█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -](   1)█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[   8][  15][  17][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02         P03         P04         P08         |
- BM: |  6  8  -  -  6  8  -  -  6  8  -  -  6  8 15 17  -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17| T:13
-     |  0     2     4     6     8    10    12   |
- 
- 
-La variable marcoFallo tiene: 1 01101010 0 1 2 3
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 14     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- Ha llegado el proceso P07.
- El proceso P03 ha iniciado su ejecución.
- Cola Memoria(Orden entrada en memoria por FIFO): P06 P07
- Cola Ejecucion (Orden ejecución por SRPT): P02 P01 P08
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   10   12   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    8   10   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6    8   4     8   11 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    3    3  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    1    1    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    0    0    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 3.75      TretM: 5.25
- El proceso P04 ha finalizado su ejecución con 4 fallos de página.
-  T: ( 8)( 9)(12)(13)
- M0: ┌ 6┐┌ 6┐╔ 6╗┌ 6┐
-     └ 8┘└ 8┘╚ 8╝└ 8┘
- M1: ╔  ╗┌ 8┐┌ 8┐╔ 8╗
-     ╚  ╝└ 9┘└ 9┘╚ 9╝
- M2: ┌  ┐┌  ┐┌15┐┌15┐
-     └  ┘└  ┘└12┘└12┘
- M3: ┌  ┐┌  ┐┌  ┐┌17┐
-     └  ┘└  ┘└  ┘└13┘
-            ██                                                                            ██
    Proceso: █[P01                   ][P02                   ][P03                   ][NADA █
   Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10](  11)[  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ][   6][   8][  15](    )[    ]█
+    Página: █[   6][  15][   8][    ][   6][  16][    ][    ][   6][   7][  10](    )[    ]█
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -](   1)[   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02         P03                     P08         |
- BM: |  6  8  -  -  6  8  -  -  6  8 15  -              -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03|
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15| T:14
-     |  0     2     4     6     8    10    12    14|
- 
- 
-La variable marcoFallo tiene: 1 01101010 0 1 2 3 2
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 15     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P06 ha entrado a memoria a partir de la posición 12.
- Cola Memoria(Orden entrada en memoria por FIFO): P07
- Cola Ejecucion (Orden ejecución por SRPT): P02 P01 P08 P06
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   11   13   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4    9   11   6     4    7 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6    9   3     8   11 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    4    4  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    2    2  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    1    1    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 4.37      TretM: 6.00
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P03                   ][P06  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7](   8)[   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][    ][    ](   6)[   8][  15][  17][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -](   1)[   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02         P03         P06         P08         |
- BM: |  6  8  -  -  6  8  -  -  6  8 15 17  -  -  -  -  -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03   |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17| T:15
-     |  0     2     4     6     8    10    12    14   |
- 
- 
-La variable marcoFallo tiene: 2 3 2 3
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 18     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P02 ha iniciado su ejecución.
- Cola Memoria(Orden entrada en memoria por FIFO): P07
- Cola Ejecucion (Orden ejecución por SRPT): P01 P08 P06
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   14   16   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   14   6     4    7 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    7    7  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    5    5  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    4    4    -    -    - En espera       323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 6.25      TretM: 8.25
- El proceso P03 ha finalizado su ejecución con 6 fallos de página.
-  T: ( 6)( 7)(14)(15)(16)(17)
- M0: ┌ 6┐┌ 6┐┌ 6┐┌ 6┐┌13┐┌13┐
-     └ 6┘└ 6┘└ 6┘└ 6┘└16┘└16┘
- M1: ┌  ┐┌ 8┐┌ 8┐┌ 8┐┌ 8┐┌ 9┐
-     └  ┘└ 7┘└ 7┘└ 7┘└ 7┘└17┘
- M2: ╔  ╗┌  ┐╔15╗┌15┐╔15╗┌15┐
-     ╚  ╝└  ┘╚14╝└14┘╚14╝└14┘
- M3: ┌  ┐╔  ╗┌  ┐╔17╗┌17┐╔17╗
-     └  ┘╚  ╝└  ┘╚15╝└15┘╚15╝
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][NADA                  ][P06  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6](   7)[   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ][   6][   8][  15](    )[    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -](   1)[   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02                     P06         P08         |
- BM: |  6  8  -  -  6  8 15  -              -  -  -  -  -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02|
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15| T:18
-     |  0     2     4     6     8    10    12    14          18|
- 
- 
-La variable marcoFallo tiene: 2 3 2 3 0 1 2
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 19     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P07 ha entrado a memoria a partir de la posición 8.
- Cola Ejecucion (Orden ejecución por SRPT): P01 P08 P06 P07
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   15   17   8     0    3 En Pausa        323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   15   5     4    7 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4    8    8  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4    6    6  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4    5    5  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 6.75      TretM: 8.87
-            ██                                                                            ██
-   Proceso: █[P01                   ][P02                   ][P07                   ][P06  █
-  Nº Marco: █[   0][   1][   2][   3](   4)[   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][    ][    ](   6)[   8][  15][  17][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -](   1)[   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01         P02         P07         P06         P08         |
- BM: |  6  8  -  -  6  8 15 17  -  -  -  -  -  -  -  -  -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02   |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17| T:19
-     |  0     2     4     6     8    10    12    14          18   |
- 
- 
-La variable marcoFallo tiene: 2 3
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 24     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P01 ha iniciado su ejecución.
- Cola Ejecucion (Orden ejecución por SRPT): P08 P06 P07
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   20   22   8     0    3 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   20   -     4    7 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4   13   13  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4   11   11  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4   10   10  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 9.25      TretM: 12.00
- El proceso P02 ha finalizado su ejecución con 7 fallos de página.
-  T: ( 4)( 5)(18)(19)(20)(21)(22)(23)
- M0: ┌ 6┐┌ 6┐╔ 6╗┌ 6┐┌13┐┌13┐╔13╗┌13┐
-     └ 4┘└ 4┘╚ 4╝└ 4┘└20┘└20┘╚20╝└20┘
- M1: ┌  ┐┌ 8┐┌ 8┐╔ 8╗┌ 8┐┌ 9┐┌ 9┐╔ 9╗
-     └  ┘└ 5┘└ 5┘╚ 5╝└ 5┘└21┘└21┘╚21╝
- M2: ╔  ╗┌  ┐┌15┐┌15┐╔15╗┌15┐┌15┐┌ 2┐
-     ╚  ╝└  ┘└18┘└18┘╚18╝└18┘└18┘└23┘
- M3: ┌  ┐╔  ╗┌  ┐┌17┐┌17┐╔17╗┌17┐┌17┐
-     └  ┘╚  ╝└  ┘└19┘└19┘╚19╝└19┘└19┘
-            ██                                                                            ██
-   Proceso: █[P01                   ][NADA                  ][P07                   ][P06  █
-  Nº Marco: █[   0][   1][   2](   3)[   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[   6][   8][  15](    )[    ][    ][    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -](   1)[   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |P01                     P07         P06         P08         |
- BM: |  6  8 15  -              -  -  -  -  -  -  -  -  -  -  -  -| M:20
-     |  0           4           8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02               P01|
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17 13  9 15  2 15| T:24
-     |  0     2     4     6     8    10    12    14          18                24|
- 
- 
-La variable marcoFallo tiene: 2 3 0 1 2 2 2
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 32     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P08 ha iniciado su ejecución.
- Cola Ejecucion (Orden ejecución por SRPT): P06 P07
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   20   30   -     0    3 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   20   -     4    7 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4   21   21  10    16   19 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4   19   19  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4   18   18  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 12.25     TretM: 16.00
- El proceso P01 ha finalizado su ejecución con 7 fallos de página.
-  T: ( 2)( 3)(24)(25)(26)(27)(28)(29)(30)(31)
- M0: ┌ 6┐╔ 6╗┌ 6┐┌ 6┐┌13┐╔13╗┌13┐┌13┐┌13┐╔13╗
-     └ 2┘╚ 2╝└ 2┘└ 2┘└26┘╚26╝└26┘└26┘└26┘╚26╝
- M1: ┌  ┐┌ 8┐╔ 8╗┌ 8┐┌ 8┐┌ 9┐╔ 9╗┌ 9┐┌ 9┐┌ 9┐
-     └  ┘└ 3┘╚ 3╝└ 3┘└ 3┘└27┘╚27╝└27┘└27┘└27┘
- M2: ┌  ┐┌  ┐┌15┐╔15╗┌15┐┌15┐┌ 2┐╔ 2╗┌ 2┐┌ 2┐
-     └  ┘└  ┘└24┘╚24╝└24┘└24┘└28┘╚28╝└28┘└28┘
- M3: ╔  ╗┌  ┐┌  ┐┌17┐╔17╗┌17┐┌17┐┌17┐╔17╗┌17┐
-     ╚  ╝└  ┘└  ┘└25┘╚25╝└25┘└25┘└25┘╚25╝└25┘
-            ██                                                                            ██
-   Proceso: █[NADA                                          ][P07                   ][P06  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][P08                   ]█
-  Nº Marco: █[  13][  14][  15][  16](  17)[  18][  19]█
-    Página: █[    ][    ][    ][   6](    )[    ][    ]█
- Apuntador: █[   -][   -][   -][   -](   1)[   -][   -]█
-            ██                                        ██
-     |                        P07         P06         P08         |
- BM: |                          -  -  -  -  -  -  -  -  6  -  -  -| M:20
-     |  0                       8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02               P01            |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17 13  9 15  2 15 17 13  9  2| T:32
-     |  0     2     4     6     8    10    12    14          18                24            |
-|P01      P08|
-|  9  9 17  6| T:32
-| 29       32|
- 
- 
-La variable marcoFallo tiene: 3 0 1 2 1 1 3 0
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 42     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P06 ha iniciado su ejecución.
- Cola Ejecucion (Orden ejecución por SRPT): P07
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   20   30   -     0    3 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   20   -     4    7 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4   21   31   -    16   19 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4   29   29  10    12   15 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4   28   28  10     -    - En memoria      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 14.75     TretM: 19.75
- El proceso P08 ha finalizado su ejecución con 7 fallos de página.
-  T: (32)(33)(34)(35)(36)(37)(38)(39)(40)(41)
- M0: ┌ 6┐┌ 6┐┌ 6┐╔ 6╗┌13┐┌13┐┌13┐╔13╗┌13┐┌13┐
-     └32┘└32┘└32┘╚32╝└36┘└36┘└36┘╚36╝└36┘└36┘
- M1: ╔  ╗┌ 8┐┌ 8┐┌ 8┐╔ 8╗┌ 9┐┌ 9┐┌ 9┐╔ 9╗┌ 9┐
-     ╚  ╝└33┘└33┘└33┘╚33╝└37┘└37┘└37┘╚37╝└37┘
- M2: ┌  ┐╔  ╗┌15┐┌15┐┌15┐╔15╗┌ 2┐┌ 2┐┌ 2┐╔ 2╗
-     └  ┘╚  ╝└34┘└34┘└34┘╚34╝└38┘└38┘└38┘╚38╝
- M3: ┌  ┐┌  ┐╔  ╗┌17┐┌17┐┌17┐╔17╗┌17┐┌17┐┌17┐
-     └  ┘└  ┘╚  ╝└35┘└35┘└35┘╚35╝└35┘└35┘└35┘
-            ██                                                                            ██
-   Proceso: █[NADA                                          ][P07                   ][P06  █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][    ][   6]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
-            ██                                                                            ██
-            ██                                        ██
-   Proceso: █                 ][NADA                  ]█
-  Nº Marco: █(  13)[  14][  15][  16][  17][  18][  19]█
-    Página: █(    )[    ][    ][    ][    ][    ][    ]█
- Apuntador: █(   1)[   -][   -][   -][   -][   -][   -]█
-            ██                                        ██
-     |                        P07         P06                     |
- BM: |                          -  -  -  -  6  -  -  -            | M:20
-     |  0                       8          12          16         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02               P01            |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17 13  9 15  2 15 17 13  9  2| T:42
-     |  0     2     4     6     8    10    12    14          18                24            |
-|P01      P08                           P06|
-|  9  9 17  6  8 15 17 13  9  2  9  9 17  6| T:42
-| 29       32                            42|
- 
- 
-La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3 0
-----------------------------------------------------------------
- SRPT-Paginación-FIFO-NC-R
- T: 52     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
- El proceso P07 ha iniciado su ejecución.
- Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   20   30   -     0    3 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   20   -     4    7 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4   21   31   -    16   19 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4   29   39   -    12   15 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4   38   38  10     8   11 En ejecución    323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 16.00     TretM: 22.25
- El proceso P06 ha finalizado su ejecución con 7 fallos de página.
-  T: (42)(43)(44)(45)(46)(47)(48)(49)(50)(51)
- M0: ┌ 6┐┌ 6┐┌ 6┐╔ 6╗┌13┐┌13┐┌13┐╔13╗┌13┐┌13┐
-     └42┘└42┘└42┘╚42╝└46┘└46┘└46┘╚46╝└46┘└46┘
- M1: ╔  ╗┌ 8┐┌ 8┐┌ 8┐╔ 8╗┌ 9┐┌ 9┐┌ 9┐╔ 9╗┌ 9┐
-     ╚  ╝└43┘└43┘└43┘╚43╝└47┘└47┘└47┘╚47╝└47┘
- M2: ┌  ┐╔  ╗┌15┐┌15┐┌15┐╔15╗┌ 2┐┌ 2┐┌ 2┐╔ 2╗
-     └  ┘╚  ╝└44┘└44┘└44┘╚44╝└48┘└48┘└48┘╚48╝
- M3: ┌  ┐┌  ┐╔  ╗┌17┐┌17┐┌17┐╔17╗┌17┐┌17┐┌17┐
-     └  ┘└  ┘╚  ╝└45┘└45┘└45┘╚45╝└45┘└45┘└45┘
-            ██                                                                            ██
-   Proceso: █[NADA                                          ][P07                   ][NADA █
-  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8](   9)[  10][  11][  12]█
-    Página: █[    ][    ][    ][    ][    ][    ][    ][    ][   6](    )[    ][    ][    ]█
- Apuntador: █[   -][   -][   -][   -][   -][   -][   -][   -][   -](   1)[   -][   -][   -]█
             ██                                                                            ██
             ██                                        ██
    Proceso: █                                         ]█
@@ -887,47 +297,123 @@ La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3 0
     Página: █[    ][    ][    ][    ][    ][    ][    ]█
  Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
             ██                                        ██
-     |                        P07                                 |
- BM: |                          6  -  -  -                        | M:20
-     |  0                       8          12                     |
-     |      P01   P02   P03   P04   P05   P04   P03         P02               P01            |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17 13  9 15  2 15 17 13  9  2| T:52
-     |  0     2     4     6     8    10    12    14          18                24            |
-|P01      P08                           P06                           P07|
-|  9  9 17  6  8 15 17 13  9  2  9  9 17  6  8 15 17 13  9  2  9  9 17  6| T:52
-| 29       32                            42                            52|
+     |P01         P02         P03                                 |
+ BM: |  6 15  8  -  6 16  -  -  6  7 10  -                        | M:20
+     |  0           4           8          12                     |
+     |         P01      P02   P03   P04   P03|
+ BT: |           6 15  8  6 16  6  7  2 10 10| T:12
+     |  0        3        6     8    10    12|
  
  
-La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3 0
+La variable marcoFallo tiene: 0 1 2
 ----------------------------------------------------------------
  SRPT-Paginación-FIFO-NC-R
- T: 62     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ T: 15     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ El proceso P02 ha iniciado su ejecución.
+ Cola Ejecucion (Orden ejecución por SRPT): P01
  Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
- P01   2  10    4   20   30   -     0    3 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P02   4   8    4   12   20   -     4    7 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 762-15 112-2 
- P03   6   6    4    6   12   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 
- P04   8   4    4    2    6   -    12   15 Finalizado      323-6 412-8 765-15 891-17 
- P05  10   2    4    0    2   -    16   19 Finalizado      123-2 542-10 
- P08  11  10    4   21   31   -    16   19 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P06  13  10    4   29   39   -    12   15 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- P07  14  10    4   38   48   -     8   11 Finalizado      323-6 412-8 765-15 891-17 654-13
- 454-9 124-2 462-9 456-9 875-17 
- TespM: 16.00     TretM: 23.50
- El proceso P07 ha finalizado su ejecución con 7 fallos de página.
-  T: (52)(53)(54)(55)(56)(57)(58)(59)(60)(61)
- M0: ┌ 6┐┌ 6┐┌ 6┐╔ 6╗┌13┐┌13┐┌13┐╔13╗┌13┐┌13┐
-     └52┘└52┘└52┘╚52╝└56┘└56┘└56┘╚56╝└56┘└56┘
- M1: ╔  ╗┌ 8┐┌ 8┐┌ 8┐╔ 8╗┌ 9┐┌ 9┐┌ 9┐╔ 9╗┌ 9┐
-     ╚  ╝└53┘└53┘└53┘╚53╝└57┘└57┘└57┘╚57╝└57┘
- M2: ┌  ┐╔  ╗┌15┐┌15┐┌15┐╔15╗┌ 2┐┌ 2┐┌ 2┐╔ 2╗
-     └  ┘╚  ╝└54┘└54┘└54┘╚54╝└58┘└58┘└58┘╚58╝
- M3: ┌  ┐┌  ┐╔  ╗┌17┐┌17┐┌17┐╔17╗┌17┐┌17┐┌17┐
-     └  ┘└  ┘╚  ╝└55┘└55┘└55┘╚55╝└55┘└55┘└55┘
+ P01   3  11    4    9   12   8     0    3 En Pausa        323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    7    9   5     4    7 En ejecución    323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    2    7   -     8   11 Finalizado      323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    0    2   -    12   15 Finalizado      123-2 542-10 
+ TespM: 4.50      TretM: 7.50
+ El proceso P03 ha finalizado su ejecución con 4 fallos de página.
+  T: ( 8)( 9)(12)(13)(14)
+ M0: ╔ 6╗┌ 6┐┌ 6┐┌ 6┐┌ 6┐
+     ╚ 8╝└ 8┘└ 8┘└ 8┘└ 8┘
+ M1: ┌  ┐╔ 7╗┌ 7┐┌ 7┐┌ 7┐
+     └  ┘╚ 9╝└ 9┘└ 9┘└ 9┘
+ M2: ┌  ┐┌  ┐╔10╗┌10┐┌10┐
+     └  ┘└  ┘╚12╝└12┘└12┘
+ M3: ┌  ┐┌  ┐┌  ┐╔17╗╔17╗
+     └  ┘└  ┘└  ┘╚13╝╚13╝
+            ██                                                                            ██
+   Proceso: █[P01                   ][P02                   ][NADA                         █
+  Nº Marco: █[   0][   1][   2][   3][   4][   5][   6](   7)[   8][   9][  10][  11][  12]█
+    Página: █[   6][  15][   8][    ][   6][  16][  15](    )[    ][    ][    ][    ][    ]█
+ Apuntador: █[   -][   -][   -][   -][   -][   -][   -](   1)[   -][   -][   -][   -][   -]█
+            ██                                                                            ██
+            ██                                        ██
+   Proceso: █                                         ]█
+  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
+    Página: █[    ][    ][    ][    ][    ][    ][    ]█
+ Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
+            ██                                        ██
+     |P01         P02                                             |
+ BM: |  6 15  8  -  6 16 15  -                                    | M:20
+     |  0           4           8                                 |
+     |         P01      P02   P03   P04   P03      P02|
+ BT: |           6 15  8  6 16  6  7  2 10 10 17 17 15| T:15
+     |  0        3        6     8    10    12       15|
+ 
+ 
+La variable marcoFallo tiene: 0 1 2 3 3 2
+----------------------------------------------------------------
+ SRPT-Paginación-FIFO-NC-R
+ T: 20     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ El proceso P01 ha iniciado su ejecución.
+ Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
+ P01   3  11    4   14   17   8     0    3 En ejecución    323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    7   14   -     4    7 Finalizado      323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    2    7   -     8   11 Finalizado      323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    0    2   -    12   15 Finalizado      123-2 542-10 
+ TespM: 5.75      TretM: 10.00
+ El proceso P02 ha finalizado su ejecución con 7 fallos de página.
+  T: ( 6)( 7)(15)(16)(17)(18)(19)
+ M0: ╔ 6╗┌ 6┐┌ 6┐┌ 6┐╔13╗┌13┐┌13┐
+     ╚ 6╝└ 6┘└ 6┘└ 6┘╚17╝└17┘└17┘
+ M1: ┌  ┐╔16╗┌16┐┌16┐┌16┐╔ 9╗┌ 9┐
+     └  ┘╚ 7╝└ 7┘└ 7┘└ 7┘╚18╝└18┘
+ M2: ┌  ┐┌  ┐╔15╗┌15┐┌15┐┌15┐╔ 8╗
+     └  ┘└  ┘╚15╝└15┘└15┘└15┘╚19╝
+ M3: ┌  ┐┌  ┐┌  ┐╔17╗┌17┐┌17┐┌17┐
+     └  ┘└  ┘└  ┘╚16╝└16┘└16┘└16┘
+            ██                                                                            ██
+   Proceso: █[P01                   ][NADA                                                 █
+  Nº Marco: █(   0)[   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
+    Página: █(   6)[  15][   8][   2][    ][    ][    ][    ][    ][    ][    ][    ][    ]█
+ Apuntador: █(   1)[   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -][   -]█
+            ██                                                                            ██
+            ██                                        ██
+   Proceso: █                                         ]█
+  Nº Marco: █[  13][  14][  15][  16][  17][  18][  19]█
+    Página: █[    ][    ][    ][    ][    ][    ][    ]█
+ Apuntador: █[   -][   -][   -][   -][   -][   -][   -]█
+            ██                                        ██
+     |P01                                                         |
+ BM: |  6 15  8  2                                                | M:20
+     |  0           4                                             |
+     |         P01      P02   P03   P04   P03      P02            P01|
+ BT: |           6 15  8  6 16  6  7  2 10 10 17 17 15 17 13  9  8  2| T:20
+     |  0        3        6     8    10    12       15             20|
+ 
+ 
+La variable marcoFallo tiene: 0 1 2 3 0 1 2 3
+----------------------------------------------------------------
+ SRPT-Paginación-FIFO-NC-R
+ T: 28     Nº Dirs: 1000   Tam Pág: 50     Nº Marc: 20        mNUR: 2     
+ Ref Tll Tej nMar Tesp Tret Trej Mini Mfin Estado          Dirección - Página
+ P01   3  11    4   14   25   -     0    3 Finalizado      323-6 784-15 412-8 120-2 891-17
+ 654-13 454-9 124-2 462-9 456-9 546-10 
+ P02   6   7    4    7   14   -     4    7 Finalizado      323-6 815-16 765-15 891-17 654-13
+ 454-9 423-8 
+ P03   8   5    4    2    7   -     8   11 Finalizado      323-6 384-7 541-10 891-17 892-17 
+ P04  10   2    4    0    2   -    12   15 Finalizado      123-2 542-10 
+ TespM: 5.75      TretM: 12.00
+ El proceso P01 ha finalizado su ejecución con 8 fallos de página.
+  T: ( 3)( 4)( 5)(20)(21)(22)(23)(24)(25)(26)(27)
+ M0: ╔ 6╗┌ 6┐┌ 6┐┌ 6┐╔17╗┌17┐┌17┐┌17┐┌17┐┌17┐┌17┐
+     ╚ 3╝└ 3┘└ 3┘└ 3┘╚21╝└21┘└21┘└21┘└21┘└21┘└21┘
+ M1: ┌  ┐╔15╗┌15┐┌15┐┌15┐╔13╗┌13┐┌13┐┌13┐┌13┐┌13┐
+     └  ┘╚ 4╝└ 4┘└ 4┘└ 4┘╚22╝└22┘└22┘└22┘└22┘└22┘
+ M2: ┌  ┐┌  ┐╔ 8╗┌ 8┐┌ 8┐┌ 8┐╔ 9╗┌ 9┐╔ 9╗╔ 9╗┌ 9┐
+     └  ┘└  ┘╚ 5╝└ 5┘└ 5┘└ 5┘╚23╝└23┘╚23╝╚23╝└23┘
+ M3: ┌  ┐┌  ┐┌  ┐╔ 2╗┌ 2┐┌ 2┐┌ 2┐╔ 2╗┌ 2┐┌ 2┐╔10╗
+     └  ┘└  ┘└  ┘╚20╝└20┘└20┘└20┘╚20╝└20┘└20┘╚27╝
             ██                                                                            ██
    Proceso: █[NADA                                                                         █
   Nº Marco: █[   0][   1][   2][   3][   4][   5][   6][   7][   8][   9][  10][  11][  12]█
@@ -943,18 +429,12 @@ La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3 0
      |                                                            |
  BM: |                                                            | M:20
      |  0                                                         |
-     |      P01   P02   P03   P04   P05   P04   P03         P02               P01            |
- BT: |        6  8  6  8  6  8  6  8  2 10 15 17 15 17 13  9 15 17 13  9 15  2 15 17 13  9  2| T:62
-     |  0     2     4     6     8    10    12    14          18                24            |
-|P01      P08                           P06                           P07                     |
-|  9  9 17  6  8 15 17 13  9  2  9  9 17  6  8 15 17 13  9  2  9  9 17  6  8 15 17 13  9  2  9| T:62
-| 29       32                            42                            52                     |
-|P07      |
-|  9 17   | T:62
-| 60    62|
+     |         P01      P02   P03   P04   P03      P02            P01                        |
+ BT: |           6 15  8  6 16  6  7  2 10 10 17 17 15 17 13  9  8  2 17 13  9  2  9  9 10   | T:28
+     |  0        3        6     8    10    12       15             20                      28|
  
  
-La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3
+La variable marcoFallo tiene: 0 1 2 3 0 1 2 3 2 2 3
 ----------------------------------------------------------------
                                                  
                                                  
@@ -964,14 +444,10 @@ La variable marcoFallo tiene: 1 2 3 0 1 2 1 1 3
                                                  
 
  RefTll Tej Tesp Tret  Ini  Fin Fallos 
- P01  2  10   20   30   24   32      7 
- P02  4   8   12   20   18   24      7 
- P03  6   6    6   12   14   18      6 
- P04  8   4    2    6   12   14      4 
- P05 10   2    0    2   10   12      2 
- P08 11  10   21   31   32   42      7 
- P06 13  10   29   39   42   52      7 
- P07 14  10   38   48   52   62      7 
+ P01  3  11   14   25   20   28      8 
+ P02  6   7    7   14   15   20      7 
+ P03  8   5    2    7   12   15      4 
+ P04 10   2    0    2   10   12      2 
 
- Tiempo de espera medio: 16.00
- Tiempo de retorno medio: 23.50
+ Tiempo de espera medio: 5.75
+ Tiempo de retorno medio: 12.00
