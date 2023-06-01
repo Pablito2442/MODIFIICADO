@@ -69,29 +69,96 @@ ej_pantalla_tabla() {
     # Estado del proceso
     local est
 
-    local ancho=$(( $anchoColRef + $anchoColTll + $anchoColTej + $anchoColNm + $anchoColTEsp + $anchoColTRet + $anchoColMini + $anchoColMfin + $anchoColTREj + $anchoEstados ))
     local anchoRestante
     local anchoCadena
+
+    local anchoCadenaTotal=21
+    local anchoCadenaInter=()
+    local anchoCadenaRestPro=()
+
+    for proc in ${listaLlegada[*]};do
+        for (( i=0; ; i++ ));do
+
+            anchoCadena=$(( ${#procesoDireccion[$proc,$i]} + ${#procesoPagina[$proc,$i]} + 2 ))
+            # Si ya no quedan páginas
+            [[ -z "${procesoDireccion[$proc,$i]}" ]] \
+                && break
+
+            anchoCadenaInter[$proc]=$(( ${anchoCadenaInter[$proc]} + $anchoCadena ))
+        done
+
+        if [[ ${anchoCadenaInter[proc]} -gt $anchoCadenaTotal ]];then
+            anchoCadenaTotal=${anchoCadenaInter[proc]}
+        fi
+
+    done
+
+    local ancho=$(( $anchoColRef + $anchoColTll + $anchoColTej + $anchoColNm + $anchoColTEsp + $anchoColTRet + $anchoColMini + $anchoColMfin + $anchoColTREj + $anchoEstados + $(($anchoCadenaTotal + 2 )) + 20 ))
+
+    local anchoRestDire=$((anchoCadenaTotal - 15 ))
 	
     # Mostrar cabecera
     printf "${ft[0]}" # Negrita
+    for ((i=0; i<=${ancho}; i++));do
+        if [[ $i -eq 0 ]];then
+            printf "┌"
+        elif [[ $i -eq $ancho ]];then 
+            printf "┐"
+        else
+            printf "─"
+        fi
+    done
+    printf "${rstf}\n"
+
+    printf "│"
     # Nº proceso
     printf "%-${anchoColRef}s" " Ref"
+    printf "${cl[0]} │${cl[$color]}"
     # 1ª parte
-    printf "%${anchoColTll}s" "Tll"
-    printf "%${anchoColTej}s" "Tej"
-    printf "%${anchoColNm}s" "nMar"
+    printf "%${anchoColTll}s" " Tll"  
+    printf "${cl[0]} │${cl[$color]}"      
+    printf "%${anchoColTej}s" " Tej"
+    printf "${cl[0]} │${cl[$color]}" 
+    printf "%${anchoColNm}s" " nMar"
+    printf "${cl[0]} │${cl[$color]}" 
     # 2ª Parte
-    printf "%${anchoColTEsp}s" "Tesp"
-    printf "%${anchoColTRet}s" "Tret"
-    printf "%${anchoColTREj}s" "Trej"
-	printf "%${anchoColMini}s" "Mini"
-	printf "%${anchoColMfin}s" "Mfin"
+    printf "%${anchoColTEsp}s" " Tesp"
+    printf "${cl[0]} │${cl[$color]}" 
+    printf "%${anchoColTRet}s" " Tret"
+    printf "${cl[0]} │${cl[$color]}" 
+    printf "%${anchoColTREj}s" " Trej"
+    printf "${cl[0]} │${cl[$color]}" 
+	printf "%${anchoColMini}s" " Mini"
+    printf "${cl[0]} │${cl[$color]}" 
+	printf "%${anchoColMfin}s" " Mfin"
+    printf "${cl[0]} │${cl[$color]}" 
     # Estado
     printf "%-${anchoEstados}s" " Estado"
+    printf "│"
     # Direcciones
     printf " Dirección - Página"
+    printf "%${anchoRestDire}s" "│" 
     printf "${rstf}\n"
+    # for ((i=0; i<=${ancho}; i++));do
+    #     if [[ $i -eq 0 ]];then
+    #         printf "└"
+    #     elif [[ $i -eq $ancho ]];then 
+    #         printf "┘"
+    #     else
+    #         printf "─"
+    #     fi
+    # done
+    # printf "${rstf}\n"
+
+    for ((i=0; i<=${ancho}; i++));do
+        if [[ $i -eq 0 ]];then
+            printf "├"
+        elif [[ $i -eq $ancho ]];then 
+            printf "┤"
+        else
+            printf "─"
+        fi
+    done
 
     # Mostrar los procesos en orden de llegada
     for proc in ${listaLlegada[*]};do
@@ -103,62 +170,78 @@ ej_pantalla_tabla() {
         est=${cadenaEstado[$est]}
         selector=${estado[$proc]}
         
+        printf "${ft[0]}" # Negrita
+
+        printf "${rstf}\n"
+        printf "│"
         printf "${cl[$color]}${ft[0]}"
         # Ref
         printf "%-${anchoColRef}s" " ${nombreProceso[$proc]}"
+        printf "${cl[0]} │${cl[$color]}"
         # 1ª parte
         printf "%${anchoColTll}s" "${tiempoLlegada[$proc]}"
+        printf "${cl[0]} │${cl[$color]}"
         printf "%${anchoColTej}s" "${tiempoEjecucion[$proc]}"
+        printf "${cl[0]} │${cl[$color]}"
         printf "%${anchoColNm}s" "${minimoEstructural[$proc]}"
+        printf "${cl[0]} │${cl[$color]}"
         # 2ª Parte
         [[ -n "${tEsp[$proc]}" ]] \
             && printf "%${anchoColTEsp}s" "${tEsp[$proc]}" \
             || printf "%${anchoColTEsp}s" "-"
+        printf "${cl[0]} │${cl[$color]}"
         [[ -n "${tRet[$proc]}" ]] \
             && printf "%${anchoColTRet}s" "${tRet[$proc]}" \
             || printf "%${anchoColTRet}s" "-"
+        printf "${cl[0]} │${cl[$color]}"
         [[ -n "${tREj[$proc]}" ]] \
             && printf "%${anchoColTREj}s" "${tREj[$proc]} " \
             || printf "%${anchoColTREj}s" "-"
+        printf "${cl[0]} │${cl[$color]}"
         # Muestra los marcos iniciales y finales
 		case $selector in
             3)
-				# Bucle que recorre todos los elementos del array marcosActuales()
-				# for i in "${marcosActuales[@]}"; do
-					# printf "${marcosActuales[i]}"
-				# done
-				
+
                 printf "%${anchoColMini}s" "${marcosActuales[0]}"
+                printf "${cl[0]} │${cl[$color]}"
                 printf "%${anchoColMfin}s" "${marcosActuales[-1]}"
+                printf "${cl[0]} │${cl[$color]}"
                 datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
                 ;;
             4)
 				datos_obtiene_marcos 0 $proc
                 printf "%${anchoColMini}s" "$Mini"
+                printf "${cl[0]} │${cl[$color]}"
                 datos_obtiene_marcos 1 $proc
 				printf "%${anchoColMfin}s" "$Mfin"
+                printf "${cl[0]} │${cl[$color]}"
                 ;;
             5)
                 datos_obtiene_marcos 0 $proc
                 printf "%${anchoColMini}s" "$Mini"
+                printf "${cl[0]} │${cl[$color]}"
                 datos_obtiene_marcos 1 $proc
 				printf "%${anchoColMfin}s" "$Mfin"
+                printf "${cl[0]} │${cl[$color]}"
                 ;;
             *)
                 printf "%${anchoColMini}s" "-"
+                printf "${cl[0]} │${cl[$color]}"
                 printf "%${anchoColMfin}s" "-"
+                printf "${cl[0]} │${cl[$color]}"
                 ;;
         esac
+        
 
         # Estado
         # Para que puedan haber tildes hay que poner el ancho diferente.
         printf "%-s%*s" " ${est}" $(( ${anchoEstados} - ${#est} - 1)) ""
+        printf "${cl[0]}│${cl[$color]}"
 
         anchoRestante=$(( $anchoTotal - $ancho ))
 
         # Direcciones
         for (( i=0; ; i++ ));do
-            anchoCadena=$(( ${#procesoDireccion[$proc,$i]} + ${#procesoPagina[$proc,$i]} + 2 ))
 
             if [ $anchoRestante -lt $anchoCadena ];then
                 printf "\n"
@@ -173,7 +256,9 @@ ej_pantalla_tabla() {
             [[ -z "${procesoDireccion[$proc,$i]}" ]] \
                 && break
 
+            # Imprime todas las direcciones
             printf "${ft[1]}${procesoDireccion[$proc,$i]}-${ft[0]}${procesoPagina[$proc,$i]}"
+            
             
             if [ $i -lt ${pc[$proc]} ];then
                 printf "${ft[3]}"
@@ -181,10 +266,29 @@ ej_pantalla_tabla() {
 
             anchoRestante=$(( $anchoRestante - $anchoCadena ))
 
-        done
+        done 
+        
+        anchoCadenaRestPro[$proc]=$(($anchoCadenaTotal - ${anchoCadenaInter[proc]} + 3))
+        printf "${rstf}"
+        printf "%${anchoCadenaRestPro[$proc]}s" "│" 
 
-        printf "${rstf}\n"
     done
+    printf "${rstf}\n"
+
+    if [[ $proc -ne ${listaLlegada[-1]} ]];then
+        printf "│"
+    else
+        for ((i=0; i<=${ancho}; i++));do
+            if [[ $i -eq 0 ]];then
+                printf "└"
+            elif [[ $i -eq $ancho ]];then 
+                printf "┘"
+            else
+                printf "─"
+            fi
+        done        
+    fi
+    printf "${rstf}\n"
 
 }
 
@@ -499,21 +603,17 @@ ej_pantalla_fin_fallos() {
             printf "${ft[0]}"
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-
+                # Pintar la posicion donde se ha introducido el marco.
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
-                        printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
+                    printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
+
+                # # Codigo del apuntador
+                # elif [[ ${marcoFallo[$mom]} -eq $mar ]];then
+                #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
+
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
-
-            
-                # # Esto es una mejora que tengo que implementar despues pero no influye en nada para el codigo.
-                # # Este es el apuntador donde se introduce el siguiente marco
-                # # elif [[ ${marcoFallo[$mom]} -eq $((mar-1)) ]];then
-                # #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
-
-
-
 
             done
             printf "${rstf}\n"
@@ -601,19 +701,6 @@ ej_pantalla_inicio() {
 ej_pantalla_informacion() {
     echo -e " "
     echo -e " "
-
-    # for (( mar=0; mar<4; mar++ ));do
-    #     for (( mom=0; mom<=6; mom++ ));do
-    #         if [ ${marcoFallo[$mom]} -eq $mar ];then
-    #             echo -e "Ha entrado en la opcion"
-    #         echo -e "La variable marcoFallo de mom tiene: ${marcoFallo[$mom]}"
-    #         echo -e "La variable mar tiene: $mar"
-    #         fi
-    #     done
-    # done
-
-    echo -e "La variable marcoFallo tiene: ${marcoFallo[*]}"
-    # echo -e "La variable numfallos tiene: ${numfallos[$enEjecucion]}"
 }
 
 # DES: Mostrar el proceso que ha parado su ejecución
@@ -974,6 +1061,7 @@ ej_pantalla_linea_memoria_pequena() {
         primerMarco=$(( $ultimoMarco + 1 ))
         anchoRestante=$(( $anchoTotal - 2 ))
     done
+    printf "\n"
 }
 
 # DES: Mostrar la linea temporal
@@ -983,7 +1071,7 @@ ej_pantalla_linea_tiempo() {
 
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 2 ))
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 2 ))
     
     local primerTiempo=0
     local ultimoTiempo=""
@@ -992,15 +1080,21 @@ ej_pantalla_linea_tiempo() {
 
         # Calcular cuntos marcos se van a imprimir en esta linea
         local numBloquesPorLinea=$(( $anchoRestante / $anchoBloque ))
-        ultimoTiempo=$(( $primerTiempo + $numBloquesPorLinea - 1 ))
+        ultimoTiempo=$(( $primerTiempo + $numBloquesPorLinea - 5 ))
         if [ $ultimoTiempo -gt $t ];then
             ultimoTiempo=$(( $t ))
         fi
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
         for (( m=$primerTiempo; m<=$ultimoTiempo; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -1017,11 +1111,18 @@ ej_pantalla_linea_tiempo() {
             fi
         done
         printf "${rstf}|\n"
+        (( ++$l ))
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" " BT: "
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" " BT: "
+            printf "|"
+        else
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         for (( m=$primerTiempo; m<=$ultimoTiempo; m++ ));do
             # Poner el color
             if [ $m -eq $t ];then
@@ -1042,8 +1143,14 @@ ej_pantalla_linea_tiempo() {
 
         #TIEMPO
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
         for (( m=$primerTiempo; m<=$ultimoTiempo; m++ ));do
 
@@ -1331,10 +1438,11 @@ ej() {
     # Anchos para la tabla de procesos
     local anchoColTEsp=5
     local anchoColTRet=5
-    local anchoColTREj=$(( $anchoColTej + 1 ))
+    local anchoColTREj=$(($anchoColTej + 2 ))
     local anchoEstados=16
 	local anchoColMini=5
 	local anchoColMfin=5
+    local anchoColDire=$anchoGen
 	
 
     # Datos de los eventos que han ocurrido

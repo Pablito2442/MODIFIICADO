@@ -753,11 +753,6 @@ ej_ejecutar_guardar_fallos() {
                 # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
                 if [[ $mar -eq $mom ]];then
                     marco=${marcosActuales[$mar]}
-                    #Este de aqui solo nos lo coloca de forma descendente indiferentemente de si hay marco o no.
-
-                    
-                    # marcoFallo+=($mar)
-
                     # Posicion en la que se ha introducido 
                     for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
