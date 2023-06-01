@@ -739,7 +739,13 @@ ej_ejecutar_guardar_fallos() {
         for mar in ${!marcosActuales[*]};do
             marco=${marcosActuales[$mar]}
             resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-            resumenFIFO["$mom,$mar"]="${memoriaFIFO[$marco]}"
+
+            if [ $siguienteMarco -eq $marco ];then
+                resumenFIFO["$mom,$mar"]="1"
+                break
+            else
+                resumenFIFO["$mom,$mar"]="*"
+            fi
         done
 
     else
@@ -756,7 +762,13 @@ ej_ejecutar_guardar_fallos() {
                     # Posicion en la que se ha introducido 
                     for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
-                        resumenFIFO["$((mom+i)),$mar"]="${memoriaFIFO[$marco]}"
+
+                        if [ $siguienteMarco -eq $marco ];then
+                            resumenFIFO["$mom,$mar"]="1"
+                            break
+                        else
+                            resumenFIFO["$mom,$mar"]="*"
+                        fi
                     done
                     if [[ -n $resumenFallos["$mom,$mar"] ]];then
                         marcoFallo+=($mar)

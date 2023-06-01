@@ -305,9 +305,9 @@ ej_pantalla_reubicacion() {
     local temp
     local temp2
 
-    local anchoBloque=$anchoGen
+    local anchoBloque=$(($anchoGen + 1 ))
     local anchoEtiqueta=6
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 2 ))
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 2 ))
     
     local numBloquesPorLinea
 
@@ -319,15 +319,21 @@ ej_pantalla_reubicacion() {
 
         # Calcular cuantos marcos se van a imprimir en esta linea
         numBloquesPorLinea=$(( $anchoRestante / $anchoBloque ))
-        ultimoMarco=$(( $primerMarco + $numBloquesPorLinea - 1 ))
+        ultimoMarco=$(( $primerMarco + $numBloquesPorLinea - 5 ))
         if [ $ultimoMarco -ge $numeroMarcos ];then
             ultimoMarco=$(( $numeroMarcos - 1 ))
         fi
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -344,11 +350,17 @@ ej_pantalla_reubicacion() {
             fi
         done
         printf "${rstf}|\n"
+        (( ++$l ))
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" " ANT: "
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" " ANT: "
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Poner el color
             if [ -n "${memoriaProcesoPrevia[$m]}" ];then
@@ -359,7 +371,7 @@ ej_pantalla_reubicacion() {
                     && echo -n -e "${cl[1]}" \
                     || echo -n -e "${cl[2]}"
             else
-                printf "${cf[3]}"
+                printf "${cf[2]}"
             fi
 
             temp=${memoriaProcesoPrevia[$m]}
@@ -375,8 +387,13 @@ ej_pantalla_reubicacion() {
 
         #NÚMERO DE MARCO
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
         ultimoProceso=-2
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -422,8 +439,14 @@ ej_pantalla_reubicacion() {
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -440,11 +463,18 @@ ej_pantalla_reubicacion() {
             fi
         done
         printf "${rstf}|\n"
+        (( ++$l ))
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" " DES: "
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" " DES: "
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Poner el color
             if [ -n "${memoriaProcesoFinal[$m]}" ];then
@@ -455,7 +485,7 @@ ej_pantalla_reubicacion() {
                     && echo -n -e "${cl[1]}" \
                     || echo -n -e "${cl[2]}"
             else
-                printf "${cf[3]}"
+                printf "${cf[2]}"
             fi
 
             temp=${memoriaProcesoFinal[$m]}
@@ -471,8 +501,14 @@ ej_pantalla_reubicacion() {
 
         #NÚMERO DE MARCO
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+        
         ultimoProceso=-2
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -592,7 +628,6 @@ ej_pantalla_fin_fallos() {
 
 
 
-
         # Imprimir la evolución de cada marco
         for (( mar=0; mar<${minimoEstructural[$fin]}; mar++ ));do
             # Etiqueta del marco
@@ -606,11 +641,6 @@ ej_pantalla_fin_fallos() {
                 # Pintar la posicion donde se ha introducido el marco.
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
-
-                # # Codigo del apuntador
-                # elif [[ ${marcoFallo[$mom]} -eq $mar ]];then
-                #     printf "${cf[4]}┌%${anchoGen}s┐${cf[0]}" "${resumenFallos[$mom,$mar]}"
-
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
@@ -620,11 +650,16 @@ ej_pantalla_fin_fallos() {
             printf "%${anchoEtiquetas}s" ""
 
             for (( mom=0; mom<=$ultimoMomento; mom++ ));do
-                if [ ${marcoFallo[$mom]} -eq $mar ];then
-                    printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
-                else
-                    printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
-                fi
+            # marco=${marcosActuales[$mar]}
+            #     if [ $siguienteMarco -eq $marco ];then
+            #         printf "${cf[5]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
+            #     elif [ ${marcoFallo[$mom]} -eq $mar ];then
+            #         printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
+            #     else
+            #         printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
+            #     fi
+        
+                printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
             done
             printf "\n"
         done
@@ -958,7 +993,7 @@ ej_pantalla_linea_memoria_pequena() {
 
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 2 ))
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 2 ))
     
     local numBloquesPorLinea
 
@@ -970,15 +1005,21 @@ ej_pantalla_linea_memoria_pequena() {
 
         # Calcular cuantos marcos se van a imprimir en esta linea
         numBloquesPorLinea=$(( $anchoRestante / $anchoBloque ))
-        ultimoMarco=$(( $primerMarco + $numBloquesPorLinea - 1 ))
+        ultimoMarco=$(( $primerMarco + $numBloquesPorLinea - 5 ))
         if [ $ultimoMarco -ge $numeroMarcos ];then
             ultimoMarco=$(( $numeroMarcos - 1 ))
         fi
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Si el marco está vacío o es el mismo proceso
@@ -999,8 +1040,14 @@ ej_pantalla_linea_memoria_pequena() {
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" " BM: "
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" " BM: "
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
             # Poner el color
             if [ -n "${memoriaProceso[$m]}" ];then
@@ -1034,8 +1081,14 @@ ej_pantalla_linea_memoria_pequena() {
 
         #NÚMERO DE MARCO
         # Imprimir la etiqueta si estamos en la primera linea
-        [ $l -eq 0 ] && printf "%${anchoEtiqueta}s" ""
-        printf "|"
+        if [ $l -eq 0 ];then 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        else 
+            printf "%${anchoEtiqueta}s" ""
+            printf "|"
+        fi
+
         ultimoProceso=-2
 		Mini=()
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
