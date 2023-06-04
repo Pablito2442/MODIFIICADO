@@ -200,15 +200,15 @@ ej_pantalla_tabla() {
         printf "${cl[0]} │${cl[$color]}"
         # Muestra los marcos iniciales y finales
 		case $selector in
-            3) #En Ejecucion
-                # Añadir que marque los distintos marcos limites en aquellos casos de no ser continua.
+            3)
+
                 printf "%${anchoColMini}s" "${marcosActuales[0]}"
                 printf "${cl[0]} │${cl[$color]}"
                 printf "%${anchoColMfin}s" "${marcosActuales[-1]}"
                 printf "${cl[0]} │${cl[$color]}"
                 datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
                 ;;
-            4) #Finalizado
+            4)
 				datos_obtiene_marcos 0 $proc
                 printf "%${anchoColMini}s" "$Mini"
                 printf "${cl[0]} │${cl[$color]}"
@@ -216,7 +216,7 @@ ej_pantalla_tabla() {
 				printf "%${anchoColMfin}s" "$Mfin"
                 printf "${cl[0]} │${cl[$color]}"
                 ;;
-            5) #En espera
+            5)
                 datos_obtiene_marcos 0 $proc
                 printf "%${anchoColMini}s" "$Mini"
                 printf "${cl[0]} │${cl[$color]}"
@@ -639,8 +639,6 @@ ej_pantalla_fin_fallos() {
                 # Pintar la posicion donde se ha introducido el marco.
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
-                elif [[ "${resumenFIFO[$mom,$mar]}" == "1" ]]; then
-                    printf "${cf[5]}╔%${anchoMomento}s╗${cf[0]}" ""
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
@@ -654,10 +652,11 @@ ej_pantalla_fin_fallos() {
                 if [[ ${marcoFallo[$mom]} -eq $mar ]];then
                     printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 elif [[ "${resumenFIFO[$mom,$mar]}" == "1" ]]; then
-                    printf "${cf[5]}${ft[0]}${ft[2]}╚%${anchoMomento}s╝${ft[1]}${ft[3]}${cf[0]}" "${resumenFIFO[$mom,$mar]}"
+                    printf "${cf[13]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 else
                     printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
                 fi
+
             done
             printf "\n"
         done
@@ -938,12 +937,13 @@ ej_pantalla_salida_memoria() {
                 temp2=${colorProceso[$temp]}
                 echo -e -n "${cl[$temp2]}"
             fi
-
 			# Pone uno donde está el apuntador, el siguiente marco en ocupar
             if [ -n "${siguienteMarco}" ] && [ $siguienteMarco -eq $mar ];then
                 printf "${ft[0]}("
+				# printf "%${anchoBloqueIn}s"
             else
                 printf "["
+				# printf "%${anchoBloqueIn}s"
             fi
 			
 			
@@ -966,6 +966,8 @@ ej_pantalla_salida_memoria() {
             else
                 printf "]"
             fi
+
+            
 
             echo -e -n "${rstf}"
 
@@ -1012,7 +1014,7 @@ ej_pantalla_linea_memoria_pequena() {
             printf "|"
         else 
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         ultimoProceso=-2
@@ -1022,6 +1024,7 @@ ej_pantalla_linea_memoria_pequena() {
                 printf "%${anchoBloque}s"
                 if [ -z "${memoriaProceso[$m]}" ];then
                     ultimoProceso=-1
+					
                 fi
             # Si se cambia de proceso
             elif [ ${ultimoProceso} -ne ${memoriaProceso[$m]} ];then
@@ -1030,12 +1033,7 @@ ej_pantalla_linea_memoria_pequena() {
                 ultimoProceso=${temp}
             fi
         done
-
-        if [[ $ultimoMarco -lt $((numeroMarcos-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}|\n"
-        fi
+        printf "${rstf}|\n"
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1044,7 +1042,7 @@ ej_pantalla_linea_memoria_pequena() {
             printf "|"
         else 
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         for (( m=$primerMarco; m<=$ultimoMarco; m++ ));do
@@ -1076,12 +1074,7 @@ ej_pantalla_linea_memoria_pequena() {
                 printf "${ft[1]}"
             fi
         done
-
-        if [[ $ultimoMarco -lt $((numeroMarcos-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}| M:"${numeroMarcos}"\n"
-        fi
+        printf "${rstf}| M:"${numeroMarcos}"\n"
 
         #NÚMERO DE MARCO
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1090,7 +1083,7 @@ ej_pantalla_linea_memoria_pequena() {
             printf "|"
         else 
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         ultimoProceso=-2
@@ -1104,22 +1097,13 @@ ej_pantalla_linea_memoria_pequena() {
             if [ $ultimoProceso -eq $procesoActual ];then
                 printf "%${anchoBloque}s" ""
             else
-                if [[ $primerMarco -eq 54 ]];then
-                    printf "%${anchoBloque}s" ""
-                else
                 printf "%${anchoBloque}s" "$m"
                 ultimoProceso=$procesoActual
-                Mini=(${Mini[@]} $m)
-                fi
+				Mini=(${Mini[@]} $m)
             fi
         done
-
-	    if [[ $ultimoMarco -lt $((numeroMarcos-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}|\n"
-        fi
-
+		
+        printf "${rstf}|\n"
         # Si se ha llegado al último marco
         if [ $ultimoMarco -eq $(( $numeroMarcos - 1 )) ];then
             break;
@@ -1158,7 +1142,7 @@ ej_pantalla_linea_tiempo() {
             printf "|"
         else 
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         ultimoProceso=-2
@@ -1176,13 +1160,7 @@ ej_pantalla_linea_tiempo() {
                 ultimoProceso=${temp}
             fi
         done
-
-        if [[ $ultimoTiempo -lt $((t-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}|\n"
-        fi
-
+        printf "${rstf}|\n"
         (( ++$l ))
 
         #PÁGINAS
@@ -1192,7 +1170,7 @@ ej_pantalla_linea_tiempo() {
             printf "|"
         else
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         for (( m=$primerTiempo; m<=$ultimoTiempo; m++ ));do
@@ -1211,12 +1189,7 @@ ej_pantalla_linea_tiempo() {
             fi
             printf "%${anchoBloque}s" "${tiempoPagina[$m]}"
         done
-
-        if [[ $ultimoTiempo -lt $((t-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}| T:"$t"\n"
-        fi
+        printf "${rstf}| T:"$t"\n"
 
         #TIEMPO
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1225,29 +1198,24 @@ ej_pantalla_linea_tiempo() {
             printf "|"
         else
             printf "%${anchoEtiqueta}s" ""
-            printf " "
+            printf "|"
         fi
 
         ultimoProceso=-2
         for (( m=$primerTiempo; m<=$ultimoTiempo; m++ ));do
 
             if [[ "$ultimoProceso" -eq "-2" || -z "${tiempoProceso[$m]}" && $ultimoProceso -ne -1 || -n "${tiempoProceso[$m]}" && "${ultimoProceso}" -ne "${tiempoProceso[$m]}" ]];then
-                    printf "%${anchoBloque}s" "$m"
+                printf "%${anchoBloque}s" "$m"
 
-                    [ -z "${tiempoProceso[$m]}" ] \
-                        && ultimoProceso=-1 \
-                        || ultimoProceso=${tiempoProceso[$m]}
+                [ -z "${tiempoProceso[$m]}" ] \
+                    && ultimoProceso=-1 \
+                    || ultimoProceso=${tiempoProceso[$m]}
             else
                 printf "%${anchoBloque}s"
             fi
         done
 
-        if [[ $ultimoTiempo -lt $((t-1)) ]];then
-            printf "${rstf}\n"
-        else
-            printf "${rstf}|\n"
-        fi
-
+        printf "${rstf}|\n"
         # Si se ha llegado al último marco
         if [ $ultimoTiempo -eq $t ];then
             break;

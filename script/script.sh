@@ -31,7 +31,6 @@ source Inicializacion.sh
 
 # Muestra la cabecera con datos relevantes
 intro_cabecera_inicio() {
-
         # Cabecera que se muestra por pantalla
         clear
         echo -e         "${cf[ac]}                                                 ${rstf}"
@@ -307,10 +306,9 @@ ej_ejecutar_comprobar_reubicacion() {
     local cont=0
     # Si hay un hueco en la memoria de mas de 1 marco vacio seguido
     local hueco=0
+
     # Por cada marco
     for (( mar=0; mar <= $numeroMarcos; mar++ ));do
-
-        #ESTO PUEDE DAR A ERROR, EN CASOS EN LOS QUE SE HAYA ASIGNADO A UN PROCEOS UN SOLO MARCO DE PAGINA
 
         # Si el marco está vacío y aun no se ha llegado al final de la memoria
         if [[ -z "${memoriaProceso[$mar]}" ]] && [ $mar -ne $numeroMarcos ];then
@@ -341,7 +339,6 @@ ej_ejecutar_comprobar_reubicacion() {
 
 # DES: Reubicar la memoria
 ej_ejecutar_reubicar() {
-
     # Mostrar la pantalla porque la reubicación es un evento importante
     mostrarPantalla=1
     reubicacion=1
@@ -427,7 +424,6 @@ ej_ejecutar_reubicar() {
 
 # DES: Atender la llegada de procesos
 ej_ejecutar_llegada() {
-
     # Por cada proceso en la cola de llegada
     for p in ${colaLlegada[*]};do
         # Si su tiempo de llegada es igual al tiempo actual
@@ -465,7 +461,6 @@ ej_ejecutar_llegada() {
 # DES: Introducir procesos que han llegado a memoria si se puede
 # RET: 0 -> han entrado procesos a memoria 1 -> no han entrado procesos
 ej_ejecutar_memoria_proceso() {
-
     # Contador de cuantos procesos han entrado
     local cont=0
 
@@ -541,7 +536,6 @@ ej_ejecutar_memoria_proceso() {
 
 # DES: Introducir procesos que han llegado a memoria si se puede
 ej_ejecutar_empezar_ejecucion() {
-
     # Asignar procesador al proceso
     enEjecucion=${colaEjecucion[0]}
 
@@ -571,7 +565,6 @@ ej_ejecutar_empezar_ejecucion() {
 # DES: Ordenar procesos de la cola de memoria segun SRPT
 ej_ordenar_cola_ejecucion() {
     # Ordena los procesos en la cola segun el que menos tiempo de ejecucion restante tenga
-
     for (( i=0; i<${#colaEjecucion[@]}; i++ )); do
         for (( j=$i+1; j<${#colaEjecucion[@]}; j++ )); do
             # Comprobar si el TRej de ambos procesos está inicializado
@@ -589,7 +582,6 @@ ej_ordenar_cola_ejecucion() {
 # DES: Comprueba cual es el proceso en memoria que tenga el menor tiempo restante de ejecucion.
 # RET: 0 -> puede entrar un nuevo proceos 1 -> no se cumplen las condiciones
 ej_ejecutar_comprobar_algoritmo_SRTP() {
-
     # Comprueba si la cola tiene procesos
     if [[ ${#colaEjecucion[@]} -gt 0 ]]; then
     
@@ -615,7 +607,6 @@ ej_ejecutar_comprobar_algoritmo_SRTP() {
 # DES: Saca los procesos del proceso de ejecucion y reordena la cola
 # RET: 0=No ha salido un proceso 1=Ha sacado un proceso
 ej_ejecutar_sacar_ejecucion(){
-
     # Poner el proceso que se ha salido de ejecucion para mostrarlo en la pantalla
     salida_ejecucion=($enEjecucion)
 
@@ -623,7 +614,6 @@ ej_ejecutar_sacar_ejecucion(){
 
     local corte=${tRet[$enEjecucion]}
     marcoFallo=(${marcoFallo[@]:$corte})
-
 
     # Cambiamos el estado
     estado[$enEjecucion]=5
@@ -646,7 +636,6 @@ ej_ejecutar_sacar_ejecucion(){
 # DES: Introducir siguiente página del proceso a memoria
 # RET: 0=No ha habido fallo 1=Ha habido fallo
 ej_ejecutar_memoria_pagina() {
-
     # Página que hay que introducir
     local pagina=${pc[$enEjecucion]}
     pagina=${procesoPagina[$enEjecucion,$pagina]}
@@ -731,7 +720,6 @@ ej_calcular_marco_siguiente() {
 # DES: Guardar el estado de la memoria en este momento para luego mostrar el resumen con los fallos
 #      No está directamente relacionado con la ejecución. Es solo para la pantalla.
 ej_ejecutar_guardar_fallos() {
-
     local marco=""
     local mom=$(( ${pc[$enEjecucion]} - 1 ))
 
@@ -739,35 +727,37 @@ ej_ejecutar_guardar_fallos() {
         for mar in ${!marcosActuales[*]};do
             marco=${marcosActuales[$mar]}
             resumenFallos["$mom,$mar"]="${memoriaPagina[$marco]}"
-
+        done
+        for mar in ${!marcosActuales[*]};do
+            marco=${marcosActuales[$mar]}
             if [ $siguienteMarco -eq $marco ];then
+                # if [[ $(($mom+0)) -le ${minimoEstructural[$enEjecucion]} ]];then
+                #     resumenFIFO["$mom,$mar"]="1"
+                #     break
+                # else
+                #     resumenFIFO["$mom,$mar"]="1"
+                # fi
                 resumenFIFO["$mom,$mar"]="1"
-                break
             else
                 resumenFIFO["$mom,$mar"]="*"
             fi
         done
-
     else
         mom=0
         marcoFallo=(${marcoFallo[@]:1})
-
         # Lo repite para todos los momentos que ya habain sido introducidos antes deL SRPT para que se muestren bien por la pantalla
         for (( mom=0; mom<=$(( ${pc[$enEjecucion]} - 1 )); mom++ ));do
 
             for mar in ${!marcosActuales[*]};do
-                # Nos imprime los valores que son los que introducidos en cada instante en ese momento.
                 if [[ $mar -eq $mom ]];then
                     marco=${marcosActuales[$mar]}
                     # Posicion en la que se ha introducido 
                     for ((i=0;i<=$((${pc[$enEjecucion]}-1));++i)); do
                         resumenFallos["$((mom+i)),$mar"]="${memoriaPagina[$marco]}"
-
-                        if [ $siguienteMarco -eq $marco ];then
-                            resumenFIFO["$mom,$mar"]="1"
-                            break
-                        else
-                            resumenFIFO["$mom,$mar"]="*"
+                        resumenFIFO["$mom,$((mar+1))"]="1"
+                        if [[ "${resumenFIFO[$mom,$((mar+1))]}" == "1" ]]; then
+                            resumenFIFO["$((mom+i)),$mar"]="*"
+                            resumenFIFO["$mom,$((mar+2+i))"]="*"
                         fi
                     done
                     if [[ -n $resumenFallos["$mom,$mar"] ]];then
@@ -775,7 +765,6 @@ ej_ejecutar_guardar_fallos() {
                     fi
                 fi
             done
-
         done
         unset algoritmo_srtp[$enEjecucion]
     fi
@@ -784,7 +773,6 @@ ej_ejecutar_guardar_fallos() {
 
 # DES: Llegada de procesos, ejecución, introducción a memoria...
 ej_ejecutar() {
-
     # Calcular tiempo de espera y de ejecución para los procesos
     ej_ejecutar_tesp_tret
 
@@ -812,6 +800,7 @@ ej_ejecutar() {
         # Si el proceso se ha terminado de ejecutar
         if [ ${tREj[$enEjecucion]} -eq 0 ];then
             ej_ejecutar_fin_ejecutar
+            ej_ejecutar_memoria_proceso
         fi
 
     fi
@@ -839,7 +828,6 @@ ej_ejecutar() {
 }
 
 source Ejecucion_pantalla.sh
-
 
 # Función principal
 main() {
