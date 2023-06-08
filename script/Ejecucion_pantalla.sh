@@ -111,7 +111,7 @@ ej_pantalla_tabla() {
         fi
     done
     printf "${rstf}\n"
-
+    
     printf "│"
     # Nº proceso
     printf "%-${anchoColRef}s" " Ref"
@@ -204,7 +204,7 @@ ej_pantalla_tabla() {
                     datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
                 else
                     local bloque_inicio="${marcosActuales[0]}"
-                    local bloque_fin="${marcosActuales[0]}" 
+                    local bloque_fin="${marcosActuales[0]}"
 
                     # printf "\n"
                     for ((i=1; i<${#marcosActuales[@]}; i++)); do
@@ -222,26 +222,27 @@ ej_pantalla_tabla() {
                                 printf "%-s%*s" " ${est}" $(( ${anchoEstados} - ${#est} - 1)) ""
                                 printf "${cl[0]}│${cl[$color]}"
 
-                                # for (( i=0; ; i++ ));do
-                                #     if [ $anchoRestante -lt $anchoCadena ];then
-                                #         printf "\n"
-                                #         anchoRestante=$anchoTotal
-                                #     fi
-                                #     printf " "
-                                #     if [ $i -lt ${pc[$proc]} ];then
-                                #         printf "${ft[2]}"
-                                #     fi
-                                #     # Si ya no quedan páginas
-                                #     if [[ -z ${procesoDireccion[$proc,$i]} ]]; then
-                                #         break  # Salir del bucle interno
-                                #     fi
-                                #     # Imprime todas las direcciones
-                                #     printf "${ft[1]}${procesoDireccion[$proc,$i]}-${ft[0]}${procesoPagina[$proc,$i]}"
-                                #     if [ $i -lt ${pc[$proc]} ];then
-                                #         printf "${ft[3]}"
-                                #     fi
-                                #     anchoRestante=$(( $anchoRestante - $anchoCadena ))
-                                # done 
+
+                                for (( j=0; ; j++ ));do
+                                    if [ $anchoRestante -lt $anchoCadena ];then
+                                        printf "\n"
+                                        anchoRestante=$anchoTotal
+                                    fi
+                                    printf " "
+                                    if [ $j -lt ${pc[$proc]} ];then
+                                        printf "${ft[2]}"
+                                    fi
+                                    # Si ya no quedan páginas
+                                    if [[ -z ${procesoDireccion[$proc,$j]} ]]; then
+                                        break
+                                    fi
+                                    # Imprime todas las direcciones
+                                    printf "${ft[1]}${procesoDireccion[$proc,$j]}-${ft[0]}${procesoPagina[$proc,$j]}"
+                                    if [ $j -lt ${pc[$proc]} ];then
+                                        printf "${ft[3]}"
+                                    fi
+                                    anchoRestante=$(( $anchoRestante - $anchoCadena ))
+                                done 
 
                                 anchoCadenaRestPro[$proc]=$(($anchoCadenaTotal - ${anchoCadenaInter[proc]} ))
                                 printf "%${anchoCadenaRestPro[$proc]}s" ""
