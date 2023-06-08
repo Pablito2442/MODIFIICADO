@@ -307,32 +307,36 @@ ej_ejecutar_comprobar_reubicacion() {
     # Si hay un hueco en la memoria de mas de 1 marco vacio seguido
     local hueco=0
 
-    # Por cada marco
-    for (( mar=0; mar <= $numeroMarcos; mar++ ));do
+    if [[ -z $colaMemoria ]];then
+        return 1
+    else
+        # Por cada marco
+        for (( mar=0; mar <= $numeroMarcos; mar++ ));do
 
-        # Si el marco está vacío y aun no se ha llegado al final de la memoria
-        if [[ -z "${memoriaProceso[$mar]}" ]] && [ $mar -ne $numeroMarcos ];then
-            # incrementar contador
-            ((cont++))
+            # Si el marco está vacío y aun no se ha llegado al final de la memoria
+            if [[ -z "${memoriaProceso[$mar]}" ]] && [ $mar -ne $numeroMarcos ];then
+                # incrementar contador
+                ((cont++))
 
-        # Si el marco no está vacío o se ha llegado al final de la memoria
-        else
-            # Si no se alcanza el mínimo de marcos para la reubicaion y el contador es distinto de 0
-            if [ $cont -ne 0 ] && [ $cont -le $mNUR ];then
+            # Si el marco no está vacío o se ha llegado al final de la memoria
+            else
+                # Si no se alcanza el mínimo de marcos para la reubicaion y el contador es distinto de 0
+                if [ $cont -ne 0 ] && [ $cont -le $mNUR ];then
 
-                # Si aun no se ha llegado al final de la memoria o el numero de marcos vacios es 1
-                if [ $hueco -eq 1 ] ||  [ $mar -ne $numeroMarcos ];then
-                    return 0
+                    # Si aun no se ha llegado al final de la memoria o el numero de marcos vacios es 1
+                    if [ $hueco -eq 1 ] ||  [ $mar -ne $numeroMarcos ];then
+                        return 0
+                    fi
+                # Si se alcanza el mínimo de marcos para la reubicaion
+                elif [ $cont -ne 0 ];then
+                    hueco=1
                 fi
-            # Si se alcanza el mínimo de marcos para la reubicaion
-            elif [ $cont -ne 0 ];then
-                hueco=1
+
+                cont=0
             fi
 
-            cont=0
-        fi
-
-    done
+        done
+    fi
     return 1
 
 }

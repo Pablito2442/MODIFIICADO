@@ -76,6 +76,8 @@ ej_pantalla_tabla() {
     local anchoCadenaInter=()
     local anchoCadenaRestPro=()
 
+    local marcosContinuos
+
     for proc in ${listaLlegada[*]};do
         for (( i=0; ; i++ ));do
 
@@ -93,7 +95,7 @@ ej_pantalla_tabla() {
 
     done
 
-    local ancho=$(( $anchoColRef + $anchoColTll + $anchoColTej + $anchoColNm + $anchoColTEsp + $anchoColTRet + $anchoColMini + $anchoColMfin + $anchoColTREj + $anchoEstados + $(($anchoCadenaTotal + 2 )) + 20 ))
+    local ancho=$(( $anchoColRef + $anchoColTll + $anchoColTej + $anchoColNm + $anchoColTEsp + $anchoColTRet + $anchoColTREj + $anchoColMini + $anchoColMfin + $anchoEstados + $(($anchoCadenaTotal + 2 )) + 20 ))
 
     local anchoRestDire=$((anchoCadenaTotal - 15 ))
 	
@@ -139,16 +141,6 @@ ej_pantalla_tabla() {
     printf " Dirección - Página"
     printf "%${anchoRestDire}s" "│" 
     printf "${rstf}\n"
-    # for ((i=0; i<=${ancho}; i++));do
-    #     if [[ $i -eq 0 ]];then
-    #         printf "└"
-    #     elif [[ $i -eq $ancho ]];then 
-    #         printf "┘"
-    #     else
-    #         printf "─"
-    #     fi
-    # done
-    # printf "${rstf}\n"
 
     for ((i=0; i<=${ancho}; i++));do
         if [[ $i -eq 0 ]];then
@@ -201,12 +193,138 @@ ej_pantalla_tabla() {
         # Muestra los marcos iniciales y finales
 		case $selector in
             3) #En Ejecucion
-                # Añadir que marque los distintos marcos limites en aquellos casos de no ser continua.
-                printf "%${anchoColMini}s" "${marcosActuales[0]}"
-                printf "${cl[0]} │${cl[$color]}"
-                printf "%${anchoColMfin}s" "${marcosActuales[-1]}"
-                printf "${cl[0]} │${cl[$color]}"
-                datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
+                #Identifica si el proceso es continuo o no.
+                marcosContinuos=$((${marcosActuales[-1]}-${marcosActuales[0]}+1))
+                #En caso de que sea continuo
+                if [[ $marcosContinuos -eq ${minimoEstructural[$enEjecucion]} ]];then
+                    printf "%${anchoColMini}s" "${marcosActuales[0]}"
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColMfin}s" "${marcosActuales[-1]}"
+                    printf "${cl[0]} │${cl[$color]}"
+                    datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
+                else
+                    local bloque_inicio="${marcosActuales[0]}"
+                    local bloque_fin="${marcosActuales[0]}" 
+
+                    # printf "\n"
+                    for ((i=1; i<${#marcosActuales[@]}; i++)); do
+                        local num=${marcosActuales[i]}
+                        local pre_num=${marcosActuales[i-1]}
+                        
+                        if [[ $num -ne $(($pre_num + 1)) ]]; then
+                        # Si no es continuo
+                            if [[ $bloque_inicio -eq "${marcosActuales[0]}" ]];then
+                                printf "%${anchoColMini}s" "$bloque_inicio"
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColMfin}s" "$bloque_fin"
+                                printf "${cl[0]} │${cl[$color]}"
+                               
+                                printf "%-s%*s" " ${est}" $(( ${anchoEstados} - ${#est} - 1)) ""
+                                printf "${cl[0]}│${cl[$color]}"
+
+                                # for (( i=0; ; i++ ));do
+                                #     if [ $anchoRestante -lt $anchoCadena ];then
+                                #         printf "\n"
+                                #         anchoRestante=$anchoTotal
+                                #     fi
+                                #     printf " "
+                                #     if [ $i -lt ${pc[$proc]} ];then
+                                #         printf "${ft[2]}"
+                                #     fi
+                                #     # Si ya no quedan páginas
+                                #     if [[ -z ${procesoDireccion[$proc,$i]} ]]; then
+                                #         break  # Salir del bucle interno
+                                #     fi
+                                #     # Imprime todas las direcciones
+                                #     printf "${ft[1]}${procesoDireccion[$proc,$i]}-${ft[0]}${procesoPagina[$proc,$i]}"
+                                #     if [ $i -lt ${pc[$proc]} ];then
+                                #         printf "${ft[3]}"
+                                #     fi
+                                #     anchoRestante=$(( $anchoRestante - $anchoCadena ))
+                                # done 
+
+                                anchoCadenaRestPro[$proc]=$(($anchoCadenaTotal - ${anchoCadenaInter[proc]} ))
+                                printf "%${anchoCadenaRestPro[$proc]}s" ""
+                                printf "${cl[0]}│${cl[$color]}" 
+                            
+                                printf "\n" 
+                            else
+                                # Ref
+                                printf "${cl[0]}│ ${cl[$color]}"
+                                printf "%-${anchoColRef}s" ""
+                                printf "${cl[0]} │${cl[$color]}"
+                                # 1ª parte
+                                printf "%${anchoColTll}s" ""
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColTej}s" ""
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColNm}s" ""
+                                printf "${cl[0]} │${cl[$color]}"
+                                # 2ª Parte
+                                printf "%${anchoColTEsp}s" "" 
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColTRet}s" ""
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColTREj}s" " " 
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColMini}s" "$bloque_inicio"
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "%${anchoColMfin}s" "$bloque_fin"
+                                printf "${cl[0]} │${cl[$color]}"
+                                printf "\n"
+                            fi
+
+                            bloque_inicio=$num
+                            bloque_fin=$num
+                        else
+                            # El número es continuo, actualiza el fin del bloque actual
+                            bloque_fin=$num
+                        fi
+                       
+                    done
+
+                    # Muestra el último bloque
+                    # Ref
+                    printf "${cl[0]}│ ${cl[$color]}"
+                    printf "%-${anchoColRef}s" ""
+                    printf "${cl[0]} │${cl[$color]}"
+                    # 1ª parte
+                    printf "%${anchoColTll}s" ""
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColTej}s" ""
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColNm}s" ""
+                    printf "${cl[0]} │${cl[$color]}"
+                    # 2ª Parte
+                    printf "%${anchoColTEsp}s" "" 
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColTRet}s" ""                        
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColTREj}s" " " 
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColMini}s" "$bloque_inicio"
+                    printf "${cl[0]} │${cl[$color]}"
+                    printf "%${anchoColMfin}s" "${marcosActuales[-1]}"
+                    printf "${cl[0]} │${cl[$color]}"
+                    datos_almacena_marcos ${marcosActuales[0]} ${marcosActuales[-1]} ${proc}
+
+                    printf "%${anchoEstados}s" ""
+                    printf "${cl[0]}│${cl[$color]}"
+                    # Direcciones  
+                    for (( i=0; ; i++ ));do
+                        # Si ya no quedan páginas
+                        [[ -z "${procesoDireccion[$proc,$i]}" ]] \
+                            && break
+                        anchoRestante=$(( $anchoRestante - $anchoCadena ))
+                    done 
+
+                    anchoCadenaRestPro[$proc]=$(($anchoCadenaTotal - ${anchoCadenaInter[proc]} ))
+
+                    printf "%${anchoCadenaTotal}s" ""
+                    printf "${cl[0]} │${cl[$color]}"  
+
+                    continue
+                fi
                 ;;
             4) #Finalizado
 				datos_obtiene_marcos 0 $proc
@@ -232,7 +350,6 @@ ej_pantalla_tabla() {
                 ;;
         esac
         
-
         # Estado
         # Para que puedan haber tildes hay que poner el ancho diferente.
         printf "%-s%*s" " ${est}" $(( ${anchoEstados} - ${#est} - 1)) ""
@@ -640,7 +757,7 @@ ej_pantalla_fin_fallos() {
                 if [ ${marcoFallo[$mom]} -eq $mar ];then
                     printf "${cf[3]}╔%${anchoGen}s╗${cf[0]}" "${resumenFallos[$mom,$mar]}"
                 elif [[ "${resumenFIFO[$mom,$mar]}" == "1" ]]; then
-                    printf "${cf[5]}╔%${anchoMomento}s╗${cf[0]}" ""
+                    printf "${cf[0]}╔%${anchoMomento}s╗${cf[0]}" ""
                 else
                     printf "┌%${anchoGen}s┐" "${resumenFallos[$mom,$mar]}"
                 fi
@@ -654,7 +771,7 @@ ej_pantalla_fin_fallos() {
                 if [[ ${marcoFallo[$mom]} -eq $mar ]];then
                     printf "${cf[3]}╚%${anchoMomento}s╝${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 elif [[ "${resumenFIFO[$mom,$mar]}" == "1" ]]; then
-                    printf "${cf[5]}${ft[0]}${ft[2]}╚%${anchoMomento}s╝${ft[1]}${ft[3]}${cf[0]}" "${resumenFIFO[$mom,$mar]}"
+                    printf "${cf[0]}${ft[0]}${ft[2]}╚%${anchoMomento}s╝${ft[1]}${ft[3]}${cf[0]}" "${resumenFIFO[$mom,$mar]}"
                 else
                     printf "└%${anchoMomento}s┘" "${resumenFIFO[$mom,$mar]}"
                 fi
@@ -988,7 +1105,7 @@ ej_pantalla_linea_memoria_pequena() {
 
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 2 ))
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 6 ))
     
     local numBloquesPorLinea
 
@@ -1104,13 +1221,9 @@ ej_pantalla_linea_memoria_pequena() {
             if [ $ultimoProceso -eq $procesoActual ];then
                 printf "%${anchoBloque}s" ""
             else
-                if [[ $primerMarco -eq 54 ]];then
-                    printf "%${anchoBloque}s" ""
-                else
                 printf "%${anchoBloque}s" "$m"
                 ultimoProceso=$procesoActual
                 Mini=(${Mini[@]} $m)
-                fi
             fi
         done
 
@@ -1137,7 +1250,7 @@ ej_pantalla_linea_tiempo() {
 
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 2 ))
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta + 6 ))
     
     local primerTiempo=0
     local ultimoTiempo=""
