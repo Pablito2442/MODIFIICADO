@@ -10,10 +10,13 @@
     readonly carpetaInformes="$DIR/informes"        # Carpeta donde se guardan los informes
     archivoInformeBW="informeBW.txt"          # Archivo de informes sin color por defecto
     archivoInformeCOLOR="informeCOLOR.txt"          # Archivo de informes con color por defecto
-    readonly carpetaDatos="$DIR/procesos"           # Carpeta donde se guardan los datos de las ejecuciones
-    readonly carpetaRangos="$DIR/rangos"           # Carpeta donde se guardan los rangos de las ejecuciones
-	readonly archivoUltimaEjecucion="$carpetaDatos/datos.txt" # Archivo con los datos de la última ejecución. Siempre se guarda
-	readonly archivoUltimaEjecucionRango="$carpetaRangos/datosrangos.txt" # Archivo con los datos de la última ejecución. Siempre se guarda
+    readonly carpetaDatos="$DIR/FDatos"           # Carpeta donde se guardan los datos de las ejecuciones
+    readonly carpetaUltimasEjecuciones="$DIR/FLast"           # Carpeta donde se guardan las ultimas ejecutaciones
+    readonly carpetaRangos="$DIR/FRangos"           # Carpeta donde se guardan los rangos de las ejecuciones
+    readonly carpetaRangosTotal="$DIR/FRangosAleTotal"           # Carpeta donde se guardan los rangos de las ejecuciones
+	readonly archivoUltimaEjecucion="$carpetaUltimasEjecuciones/DatosLast.txt" # Archivo con los datos de la última ejecución. Siempre se guarda
+	readonly archivoUltimaEjecucionRango="$carpetaUltimasEjecuciones/DatosRangosLast.txt" # Archivo con los datos de la última ejecución. Siempre se guarda
+	readonly archivoRangoTotal="$carpetaRangosTotal/DatosRangosAleatorioTotal.txt" # Archivo con los datos de la última ejecución. Siempre se guarda
     readonly anchoInformeBW=95                   # Ancho del infome en texto plano
 
     readonly anchoNumeroProceso=${#maximoProcesos}  # Se usa para nombrar a los procesos y rellenar el nombre con 0s ej P01

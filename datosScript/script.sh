@@ -77,10 +77,10 @@ intro_cabecera_inicio() {
         informar_plano "#                                               #"
         informar_plano "#  Autores anteriores:                          #"
         informar_plano "#  RR-Pag-NRU-C-FI: Diego García Muñoz          #"
-        informar_color "#  PriMayor-SN-NC-R: Iván Cortés                #"
-        informar_color "#  R-R-Pag-Reloj-C-FI: Ismael Franco Hernando   #"
-        informar_color "#  FCFS-SJF-Pag-NFU-NC-R: Cacuci Catalin Andrei #"
-        informar_color "#  FCFS-SJF-Pag-NFU-NC-R: Jose Maria Santos     #"
+        informar_plano "#  PriMayor-SN-NC-R: Iván Cortés                #"
+        informar_plano "#  R-R-Pag-Reloj-C-FI: Ismael Franco Hernando   #"
+        informar_plano "#  FCFS-SJF-Pag-NFU-NC-R: Cacuci Catalin Andrei #"
+        informar_plano "#  FCFS-SJF-Pag-NFU-NC-R: Jose Maria Santos     #"
         informar_plano "#                                               #"
         informar_plano "#  Asignatura: Sistemas Operativos              #"
         informar_plano "#  Profesor: Jose Manuel Saiz Diez              #"
@@ -102,26 +102,26 @@ intro_cabecera_inicio() {
         # Informe a color.
         informar_color         "${cf[ac]}                                                 ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
-        informar_color "${cf[17]}${cl[1]}  Algoritmo de procesos  :  SRPT                ${rstf}"
+        informar_color "${cf[17]}${cl[1]}  Algoritmo de procesos  :  SRPT                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Tipo de algoritmo      :  PAGINACIÓN           ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Algoritmo de memoria   :  FIFO                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Memoria continua       :  NO                   ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Memoria reublicable    :  SÍ                   ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
-        informar_color "${cf[17]}${cl[1]}  Autor: Maté Gómez, Pablo                 ${rstf}"
+        informar_color "${cf[17]}${cl[1]}  Autor: Maté Gómez, Pablo                       ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Autores anteriores:                            ${rstf}"
         informar_color "${cf[17]}${cl[1]}  RR-Pag-NRU-C-FI: Diego García Muñoz            ${rstf}"
         informar_color "${cf[17]}${cl[1]}  PriMayor-SN-NC-R: Iván Cortés                  ${rstf}"
         informar_color "${cf[17]}${cl[1]}  R-R-Pag-Reloj-C-FI: Ismael Franco Hernando     ${rstf}"
         informar_color "${cf[17]}${cl[1]}  FCFS-SJF-Pag-NFU-NC-R: Cacuci Catalin Andrei   ${rstf}"
-        informar_color "${cf[17]}${cl[1]}  FCFS-SJF-Pag-NFU-NC-R: Jose Maria Santos   ${rstf}"
+        informar_color "${cf[17]}${cl[1]}  FCFS-SJF-Pag-NFU-NC-R: Jose Maria Santos       ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Asignatura: Sistemas Operativos                ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Profesor: Jose Manuel Saiz Diez                ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  Este script se creó usando la versión          ${rstf}"
-        informar_color "${cf[17]}${cl[1]}  5.2.2 de Bash si no se ejecuta con esta             ${rstf}"
+        informar_color "${cf[17]}${cl[1]}  5.2.2 de Bash si no se ejecuta con esta        ${rstf}"
         informar_color "${cf[17]}${cl[1]}  versión pueden surgir problemas.               ${rstf}"
         informar_color         "${cf[17]}                                                 ${rstf}"
         informar_color "${cf[17]}${cl[1]}  © Creative Commons                             ${rstf}"
@@ -140,7 +140,7 @@ intro_cabecera_inicio() {
 intro_cabecera_tamano() {
 
         clear
-        echo -e        "${cf[$ac]}                                                 ${rstf}"
+        echo -e         "${cf[$ac]}                                                 ${rstf}"
         echo -e         "${cf[17]}                                                 ${rstf}"
         echo -e "${cf[17]}${cl[1]}                      AVISO                      ${rstf}"
         echo -e         "${cf[17]}                                                 ${rstf}"
@@ -498,8 +498,6 @@ ej_ejecutar_memoria_proceso() {
 
                 fi
             done
-			
-			# Asignar variables de marco inicial y marco final.
 
             # Añadir proceso a la cola de ejecución
             colaEjecucion+=($p)
@@ -735,12 +733,6 @@ ej_ejecutar_guardar_fallos() {
         for mar in ${!marcosActuales[*]};do
             marco=${marcosActuales[$mar]}
             if [ $siguienteMarco -eq $marco ];then
-                # if [[ $(($mom+0)) -le ${minimoEstructural[$enEjecucion]} ]];then
-                #     resumenFIFO["$mom,$mar"]="1"
-                #     break
-                # else
-                #     resumenFIFO["$mom,$mar"]="1"
-                # fi
                 resumenFIFO["$mom,$mar"]="1"
             else
                 resumenFIFO["$mom,$mar"]="*"

@@ -5,10 +5,27 @@ datos_pregunta_guardar_rangos() {
     preguntar "Guardar rangos" \
               "¿Dónde quieres guardar los rangos?" \
               guardarProcesos \
-              "En el fichero de rangos de última ejecución (datosrangos.txt)" \
+              "En el fichero de rangos de última ejecución (DatosRangosDefault.txt)" \
               "Otro fichero de rangos"
     
     case $guardarProcesos in
+        1 )
+            archivoDatos="DatosRangosDefault.txt"
+
+            # Informar donde se guardarán los procesos.
+            informar_plano "Carpeta de datos: ${carpetaDatos}"
+            informar_plano "Archivo de datos: ${archivoDatos}"
+            informar_plano ""
+
+            informar_color "Carpeta de datos: ${ft[0]}${cl[re]}${carpetaDatos}${rstf}"
+            informar_color "Archivo de datos: ${ft[0]}${cl[re]}${archivoDatos}${rstf}"
+            informar_color ""
+
+            # Pasa el archivo de procesos a ruta absoluta
+            archivoRangos="${carpetaRangos}/${archivoRangos}"
+
+        ;;
+
          2)
 
             echo -e -n "Introduce el nombre para el ${ft[0]}${cl[re]}fichero de rangos${rstf} con extensión: "
@@ -46,8 +63,8 @@ datos_pregunta_guardar_rangos() {
 datos_rango_guardar() {
 
     # Si la carpeta de datos no existe, crearla
-    [ ! -d "${carpetaRangos}" ] \
-        && mkdir "${carpetaRangos}"
+    [ ! -d "${carpetaUltimasEjecuciones}" ] \
+        && mkdir "${carpetaUltimasEjecuciones}"
 
     # Se crea una cadena que luego se guarda en los archivos respectivos
     local cadena=""
@@ -102,7 +119,7 @@ datos_rango_guardar() {
     echo -e -n "${cadena}" > "$archivoUltimaEjecucionRango"
 
     # Si se ha dado un archivo de datos
-    if [[ $archivoRangos ]];then
+    if [[ $archivoUltimaEjecucion ]];then
         echo -e -n "${cadena}" > "$archivoRangos"
     fi
 
@@ -115,10 +132,27 @@ datos_pregunta_guardar() {
     preguntar "Guardar datos" \
               "¿Donde quieres guardar los datos?" \
               guardarProcesos \
-              "En el fichero de datos de última ejecución (datos.txt)" \
+              "En el fichero de Datos por defecto (DatosDefault.txt)" \
               "Otro fichero de datos"
     
     case $guardarProcesos in
+        1 )
+            archivoDatos="DatosDefault.txt"
+
+            # Informar donde se guardarán los procesos.
+            informar_plano "Carpeta de datos: ${carpetaDatos}"
+            informar_plano "Archivo de datos: ${archivoDatos}"
+            informar_plano ""
+
+            informar_color "Carpeta de datos: ${ft[0]}${cl[re]}${carpetaDatos}${rstf}"
+            informar_color "Archivo de datos: ${ft[0]}${cl[re]}${archivoDatos}${rstf}"
+            informar_color ""
+
+            # Pasa el archivo de procesos a ruta absoluta
+            archivoDatos="${carpetaDatos}/${archivoDatos}"
+
+        ;;
+
         2 )
 
             echo -e -n "Introduce el nombre para el ${ft[0]}${cl[re]}archivo de datos${rstf} con extensión: "
@@ -156,8 +190,8 @@ datos_pregunta_guardar() {
 datos_guardar() {
 
     # Si la carpeta de datos no existe, crearla
-    [ ! -d "${carpetaDatos}" ] \
-        && mkdir "${carpetaDatos}"
+    [ ! -d "${carpetaUltimasEjecuciones}" ] \
+        && mkdir "${carpetaUltimasEjecuciones}"
 
     # Se crea una cadena que luego se guarda en los archivos respectivos
     local cadena=""
@@ -265,11 +299,15 @@ datos_tabla_procesos() {
 
 # DES: Almacena los limites asociados a un proceso en un solo argumento
 datos_almacena_marcos(){
-    marcoIni=$1
-    marcoFin=$2
-	proceso=$3
-    marcos[${proceso}]="${marcoIni} ${marcoFin}"
-    
+    proceso=$1
+    marcoIni=$2
+    marcoFin=$3
+    # Verificar si el proceso ya tiene valores almacenados
+    if [[ -n ${marcos[${proceso}]} ]];then
+        marcos[${proceso}]+=" ${marcoIni} ${marcoFin}"  
+    else
+        marcos[${proceso}]="${marcoIni} ${marcoFin}"  
+    fi
 }
 
 datos_obtiene_marcos(){
@@ -285,8 +323,22 @@ datos_obtiene_marcos(){
 	if [ $eleccion -eq 1 ]; then
     Mfin="${strarr[${eleccion}]}"
 	fi
+    
+    if [ $eleccion -eq 2 ]; then
+    Mini="${strarr[${eleccion}]}"
+	fi
 	
+	if [ $eleccion -eq 3 ]; then
+    Mfin="${strarr[${eleccion}]}"
+	fi
+
+    if [ $eleccion -eq 4 ]; then
+    Mini="${strarr[${eleccion}]}"
+	fi
 	
+	if [ $eleccion -eq 5 ]; then
+    Mfin="${strarr[${eleccion}]}"
+	fi
 
 }
 
@@ -613,7 +665,6 @@ datos_teclado_direcciones() {
     done
 }
 
-
 # DES: Introducir los datos por teclado
 datos_teclado() {
     
@@ -800,7 +851,7 @@ datos_archivo_leer() {
     local datosProceso=()
 
     # Hayar path completa del archivo seleccionado
-    seleccion="${carpetaDatos}/$seleccion"
+    seleccion="${carpeta}/$seleccion"
 
     # se va leyendo cada linea del archivo
     while read linea;do
@@ -881,7 +932,7 @@ datos_archivo_rangos_leer() {
     local datosProceso=()
 
     # Hayar path completa del archivo seleccionado
-    seleccion="${carpetaRangos}/$seleccion"
+    seleccion="${carpeta}/$seleccion"
 
 	while IFS= read -r line
 	do
@@ -943,8 +994,9 @@ datos_archivo_rangos_leer() {
 
 # DES: Introducir los datos de la ultima ejecución
 datos_archivo_ultima_ejecucion() {
-    # Archivo datos.txt es el fichero de ultima ejecución.
-    local seleccion=datos.txt
+    # Archivo DatosLast.txt es el fichero de ultima ejecución.
+    local seleccion=DatosLast.txt
+    local carpeta=$carpetaUltimasEjecuciones
 
     # Hacer los informes
     datos_archivo_informes
@@ -967,8 +1019,12 @@ datos_archivo_ultima_ejecucion() {
 
 # DES: Introducir los datos de la ultima ejecución
 datos_archivo_ultima_ejecucion_random() {
-    # Archivo datos.txt es el fichero de ultima ejecución.
-    local seleccion=datosrangos.txt
+    # Archivo DatosRangosLast.txt es el fichero de ultima ejecución.
+    local seleccion=DatosRangosLast.txt
+    local carpeta=$carpetaUltimasEjecuciones
+
+    # Hacer los informes
+    datos_pregunta_guardar
 
     # Hacer los informes
     datos_archivo_informes
@@ -1061,6 +1117,7 @@ datos_archivo() {
     local lista=()
     # Archivo que se ha seleccionado de la lista
     local seleccion=""
+    local carpeta=$carpetaDatos
 
     # comprobaciones previas
     datos_archivo_comprobar
@@ -1103,6 +1160,120 @@ datos_archivo_rangos() {
     local lista=()
     # Archivo que se ha seleccionado de la lista
     local seleccion=""
+    local carpeta=$carpetaRangos
+	
+
+    # comprobaciones previas
+    datos_archivo_rangos_comprobar
+
+    # Seleccionar archivo
+    datos_archivo_seleccionar
+
+    # Hacer los informes
+    datos_archivo_informes
+
+    # Interpreta los datos que hay en el archivos seleccionado
+    # y crea todas las demás variables a partir de ellos
+    datos_archivo_rangos_leer
+
+	# Mostrar la información de los rangos de memoria
+	clear
+    datos_random_tabla1
+	pausa_tecla    
+	
+	#Calcula nuevos datos a partir de los rangos
+	aleatorio_entre numeroMarcos ${numMarcosMinimo} ${numMarcosMaximo}
+	aleatorio_entre tamanoPagina ${tamanoPaginaMinimo} ${tamanoPaginaMaximo}
+    datos_random_memoria
+	aleatorio_entre mNUR ${minimoReubicacionMinimo} ${minimoReubicacionMaximo}
+	aleatorio_entre numeroProcesos ${numeroProcesosMinimo} ${numeroProcesosMaximo}
+	
+	# GENERAR LOS PROCESOS    
+    for (( p=0; p < ${numeroProcesos}; p++ ));do
+
+        clear
+        echo "Generando procesos..."
+        barra_loading "$(( $p + 1 ))" "${numeroProcesos}"
+
+        # Añadir proceso a lista de procesos
+        procesos+=($p)
+        # Asignar color al proceso.
+        colorProceso[$p]=$(( (${p} % 12) + 5 ))
+        # Dar nombre al proceso 1 -> P01
+        generar_nombre_proceso
+        
+        aleatorio_entre tiempoLlegada[$p] ${tiempoLlegadaMinimo} ${tiempoLlegadaMaximo}
+        aleatorio_entre tiempoEjecucion[$p] ${tiempoEjecucionMinimo} ${tiempoEjecucionMaximo}
+        
+        # Si se aceptan desperdicios cambiar como se calcula el mínimo estructural
+        if [[ $desperdicios -eq 1 ]];then
+            aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimo} ${minimoEstructuralMaximo}
+        else
+            # tiempo de ejecución es menor al mínimo máximo se escoge como máximo el tiempo de ejecución
+            if [[ ${tiempoEjecucion[$p]} -lt ${minimoEstructuralMaximo} ]];then
+                aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimo} ${tiempoEjecucion[$p]}
+            # Si no se coge el mínimo máximo
+            else
+                aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimo} ${minimoEstructuralMaximo}
+            fi
+        fi
+
+        # calcular las direcciones y páginas
+        for (( d=0; d < ${tiempoEjecucion[$p]}; d++ ));do
+            aleatorio_entre procesoDireccion[$p,$d] ${direccionMinima} ${direccionMaxima}
+            procesoPagina[${p},${d}]=$(( procesoDireccion[${p},${d}] / $tamanoPagina ))
+
+            # Actualizar anchoGen si la dirección de página es muy grande
+            [ ${#procesoPagina[$p,$d]} -gt $anchoGen ] && anchoGen=${#procesoPagina[$p,$d]}
+
+        done
+
+        # calcular anchos
+        # Calcular ancho columna tiempo llegada
+        [ $(( ${#tiempoLlegada[$p]} + 2 )) -gt ${anchoColTll} ] \
+            && anchoColTll=$(( ${#tiempoLlegada[$p]} + 2 ))
+        # Calcular ancho columna minimo estructural
+        [ $(( ${#minimoEstructural[$p]} + 2 )) -gt ${anchoColNm} ] \
+            && anchoColNm=$(( ${#minimoEstructural[$p]} + 2 ))
+        # Calcular ancho columna tiempo llegada
+        [ $(( ${#tiempoEjecucion[$p]} + 2 )) -gt ${anchoColTej} ] \
+            && anchoColTej=$(( ${#tiempoEjecucion[$p]} + 2 ))
+
+    done
+	
+	# Mostrar la información de los rangos de memoria
+	clear
+    datos_random_tabla1
+	# Hacer los informes
+	datos_random_informes1
+	
+    # Ordenar los procesos
+    datos_ordenar_llegada
+	
+	# Guarda los datos de ultima ejecución o el fichero seleccionado
+	datos_rango_guardar
+    
+    pausa_tecla
+
+}
+
+# DES: Introducir los datos mediante archivo de rangos
+datos_archivo_rangos_total() {
+
+    #Parametros para la memoria
+	local tamanoPaginaMinimo="-"
+	local tamanoPaginaMaximo="-"
+	
+	local numMarcosMinimo="-"
+	local numMarcosMaximo="-"
+	
+	local minimoReubicacionMinimo="-"
+	local minimoReubicacionMaximo="-"
+	# Lista con los archivos de la carpeta de datos
+    local lista=()
+    # Archivo que se ha seleccionado de la lista
+    local seleccion=""
+    local carpeta=$carpetaRangos
 	
 
     # comprobaciones previas
@@ -1792,7 +1963,6 @@ datos_random_direcciones() {
 
 }
 
-
 # DES: Generar los procesos de forma pseudo-aleatoria
 datos_random() {
 	# Parámetros
@@ -1983,11 +2153,13 @@ datos() {
               "¿Cómo quieres introducir los datos?" \
               metodo \
               "Por teclado" \
-              "Por fichero de datos de última ejecución (datos.txt)" \
+              "Por fichero de datos de última ejecución (DatosLast.txt)" \
 			  "Por otro fichero de datos" \
               "Aleatoriamente Manual" \
-			  "Por fichero de rangos de última ejecución (datosrangos.txt)" \
-			  "Por otro fichero de rangos"
+			  "Por fichero de rangos de última ejecución (DatosRangosLast.txt)" \
+			  "Por otro fichero de rangos" \
+              "Por fichero Aleatorio total (DatosRangosAleatorioTotal.txt)"
+
 			  
 
     anchoTotal=$( tput cols )
@@ -2017,6 +2189,10 @@ datos() {
 		6 )
             # Introducir los datos archivo de rangos
             datos_archivo_rangos
+        ;;
+        7 )
+            # Introducir los datos archivo de rangos
+            datos_archivo_rangos_total
         ;;
     esac
 
