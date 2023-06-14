@@ -114,61 +114,6 @@ datos_rango_guardar() {
 
 }
 
-# DES: Guardar los datos a archivo
-datos_rango_total_guardar() {
-
-    # Si la carpeta de datos no existe, crearla
-    [ ! -d "${carpetaUltimasEjecuciones}" ] \
-        && mkdir "${carpetaUltimasEjecuciones}"
-
-    # Se crea una cadena que luego se guarda en los archivos respectivos
-    local cadena=""
-	
-	cadena+="# RANGOS PARA LA MEMORIA:\n"
-	cadena+="# Rango mínimo para el numero de marcos de página:\n"
-    cadena+="${numMarcosMinimoInter}\n"
-	cadena+="# Rango máximo para el numero de marcos de página:\n"
-    cadena+="${numMarcosMaximoInter}\n"
-    cadena+="# Rango mínimo para el tamaño de marco de página:\n"
-    cadena+="${tamanoPaginaMinimo}\n"
-	cadena+="# Rango máximo para el tamaño de marco de página:\n"
-    cadena+="${tamanoPaginaMaximoInter}\n"
-    cadena+="# Rango mínimo para el número max de uds. para la reubicación:\n"
-    cadena+="${minimoReubicacionMinimoInter}\n"
-	cadena+="# Rango máximo para el número max de uds. para la reubicación:\n"
-    cadena+="${minimoReubicacionMaximoInter}\n"
-    cadena+="# RANGOS PARA LOS PROCESOS:\n"
-    cadena+="# Rango mínimo para el numero de procesos:\n"
-	cadena+="${numeroProcesosMinimoInter}\n"
-	cadena+="# Rango máximo para el numero de procesos:\n"
-	cadena+="${numeroProcesosMaximoInter}\n"
-	cadena+="# Rango mínimo para el tiempo de llegada:\n"
-	cadena+="${tiempoLlegadaMinimoInter}\n"
-	cadena+="# Rango máximo para el tiempo de llegada:\n"
-	cadena+="${tiempoLlegadaMaximoInter}\n"
-	cadena+="# Rango mínimo para el tiempo de ejecución:\n"
-	cadena+="${tiempoEjecucionMinimoInter}\n"
-	cadena+="# Rango máximo para el tiempo de ejecución:\n"
-	cadena+="${tiempoEjecucionMaximoInter}\n"
-	cadena+="# Rango mínimo para el mínimo estructural:\n"
-	cadena+="${minimoEstructuralMinimoInter}\n"
-	cadena+="# Rango máximo para el mínimo estructural:\n"
-	cadena+="${minimoEstructuralMaximoInter}\n"
-	cadena+="# Rango mínimo para las direcciones:\n"
-	cadena+="${direccionMinimaInter}\n"
-	cadena+="# Rango máximo para las direcciones:\n"
-	cadena+="${direccionMaximaInter}\n"
-
-    # Guardar los datos en el archivo de última ejecución
-    echo -e -n "${cadena}" > "$archivoUltimaEjecucionRango"
-
-    # Si se ha dado un archivo de datos
-    if [[ $archivoRangos ]];then
-        echo -e -n "${cadena}" > "$archivoRangos"
-    fi
-
-}
-
 # DES: Pregunta si se desean guardar los procesos
 datos_pregunta_guardar() {
 
@@ -1396,7 +1341,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El numero de Marcos de pagina debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     while true; do
@@ -1414,7 +1359,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El tamaño de Marco de pagina debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     datos_random_memoria
@@ -1434,7 +1379,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El numero de Marco para la reubicacion debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     while true; do
@@ -1452,7 +1397,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El numero de procesos debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        # datos_random_informes1
     done
 
     while true; do
@@ -1469,7 +1414,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El tiempo de llegada debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     while true; do
@@ -1486,7 +1431,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El tiempo de ejecucion debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     while true; do
@@ -1494,9 +1439,9 @@ datos_archivo_rangos_total() {
         aleatorio_entre minimoEstructuralMaximoInter ${minimoEstructuralMinimo} ${minimoEstructuralMaximo}
 
         if [[ $minimoEstructuralMinimoInter -gt 0 ]] && [[ $minimoEstructuralMaximoInter -gt 0 ]];then
-            if [[ $minimoEstructuralMaximoInter -ge $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMaximoInter -le $numeroMarcos ]];then
+            if [[ $minimoEstructuralMaximoInter -gt $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMaximoInter -lt $numeroMarcos ]];then
                 break
-            elif [[ $minimoEstructuralMaximoInter -le $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMinimoInter -lt $numeroMarcos ]];then
+            elif [[ $minimoEstructuralMaximoInter -lt $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMinimoInter -lt $numeroMarcos ]];then
                 break
             fi
         fi
@@ -1507,7 +1452,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El Minimo Estructural debe de ser mayor que 0 y menor que el numero de marcos totales para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
 
     while true; do
@@ -1524,7 +1469,7 @@ datos_archivo_rangos_total() {
         printf "${ft[0]}${cl[4]} El numero minimo de direcciones debe de ser mayor que 0 para funcionar, pulsa para recalcular los datos y poder continuar.${cl[0]}${ft[1]}\n"
         pausa_tecla
         # Hacer los informes
-        datos_random_total_informes1
+        datos_random_informes1
     done
        
 	# GENERAR LOS PROCESOS    
@@ -1545,7 +1490,18 @@ datos_archivo_rangos_total() {
 
         aleatorio_entre tiempoEjecucion[$p] ${tiempoEjecucionMinimoInter} ${tiempoEjecucionMaximoInter}
         
-        aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimoInter} ${minimoEstructuralMaximoInter}
+        # Si se aceptan desperdicios cambiar como se calcula el mínimo estructural
+        if [[ $desperdicios -eq 1 ]];then
+            aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimoInter} ${minimoEstructuralMaximoInter}
+        else
+            # tiempo de ejecución es menor al mínimo máximo se escoge como máximo el tiempo de ejecución
+            if [[ ${tiempoEjecucion[$p]} -lt ${minimoEstructuralMaximo} ]];then
+                aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimoInter} ${tiempoEjecucion[$p]}
+            # Si no se coge el mínimo máximo
+            else
+                aleatorio_entre minimoEstructural[$p] ${minimoEstructuralMinimoInter} ${minimoEstructuralMaximoInter}
+            fi
+        fi
 
         # calcular las direcciones y páginas
         for (( d=0; d < ${tiempoEjecucion[$p]}; d++ ));do
@@ -1576,14 +1532,14 @@ datos_archivo_rangos_total() {
     printf "${ft[0]}${cl[5]} La tabla tiene valores validos para funcionar, pulsa para continuar con la ejecucion.${cl[0]}${ft[1]}\n"
     pausa_tecla
 	# Hacer los informes
-	datos_random_total_informes1
+	datos_random_informes1
 	
     # Ordenar los procesos
     datos_ordenar_llegada
 	
     # Preguntar si guardar el archivo de rangos
     datos_pregunta_guardar_rangos
-    datos_rango_total_guardar
+    datos_rango_guardar
 
 	# Preguntar si guardar a archivo custom
     datos_pregunta_guardar
@@ -1665,43 +1621,6 @@ datos_random_informes1() {
 	informar_plano "█           Tiempo de ejecución : %-34s █" "[ ${tiempoEjecucionMinimo} - ${tiempoEjecucionMaximo} ]"
 	informar_plano "█            Mínimo estructural : %-34s █" "[ ${minimoEstructuralMinimo} - ${minimoEstructuralMaximo} ]"
 	informar_plano "█                   Direcciones : %-34s █" "[ ${direccionMinima} - ${direccionMaxima} ]"
-	informar_plano "█                                                                    █"
-	informar_plano "██████████████████████████████████████████████████████████████████████"
-    informar_plano ""
-}
-
-# DES: Añade la tabla con los parámetros a los informes de datos de memoria
-datos_random_total_informes1() {
-    # Informe color
-    informar_color         "${cf[ac]}                                                                                ${rstf}"
-    informar_color         "${cf[17]}                                                                                ${rstf}"
-    informar_color  "${cf[17]}${cl[1]}    Número de marcos de página : %-45s  ${rstf}\n" "[ ${numMarcosMinimo} - ${numMarcosMaximo} ] -> [ ${numMarcosMinimoInter} - ${numMarcosMaximoInter} ] : ${numeroMarcos} "
-	informar_color  "${cf[17]}${cl[1]}     Tamaño de marco de página : %-45s  ${rstf}\n" "[ ${tamanoPaginaMinimo} - ${tamanoPaginaMaximo} ] -> [ ${tamanoPaginaMinimoInter} - ${tamanoPaginaMaximoInter} ] : ${tamanoPagina}"
-	informar_color  "${cf[17]}${cl[1]}          Tamaño de la memoria : %-45s  ${rstf}\n" "${tamanoMemoria}"
-    informar_color  "${cf[17]}${cl[1]}    Número máx de uds. para la reubicación : %-33s  ${rstf}\n" "[ ${minimoReubicacionMinimo} - ${minimoReubicacionMaximo} ] -> [ ${minimoReubicacionMinimoInter} - ${minimoReubicacionMaximoInter} ] : ${mNUR}"
-    informar_color         "${cf[17]}                                                                                ${rstf}"
-    informar_color  "${cf[17]}${cl[1]}            Número de procesos : %-45s  ${rstf}\n" "[ ${numeroProcesosMinimo} - ${numeroProcesosMaximo} ] -> [ ${numeroProcesosMinimoInter} - ${numeroProcesosMaximoInter} ] : ${numeroProcesos}"
-    informar_color  "${cf[17]}${cl[1]}             Tiempo de llegada : %-45s  ${rstf}\n" "[ ${tiempoLlegadaMinimo} - ${tiempoLlegadaMaximo} ] -> [ ${tiempoLlegadaMinimoInter} - ${tiempoLlegadaMaximoInter} ]"
-    informar_color  "${cf[17]}${cl[1]}           Tiempo de ejecución : %-45s  ${rstf}\n" "[ ${tiempoEjecucionMinimo} - ${tiempoEjecucionMaximo} ] -> [ ${tiempoEjecucionMinimoInter} - ${tiempoEjecucionMaximoInter} ]"
-    informar_color  "${cf[17]}${cl[1]}            Mínimo estructural : %-45s  ${rstf}\n" "[ ${minimoEstructuralMinimo} - ${minimoEstructuralMaximo} ] -> [ ${minimoEstructuralMinimoInter} - ${minimoEstructuralMaximoInter} ]"
-    informar_color  "${cf[17]}${cl[1]}                   Direcciones : %-45s  ${rstf}\n" "[ ${direccionMinima} - ${direccionMaxima} ] -> [ ${direccionMinimaInter} - ${direccionMaximaInter} ]"
-    informar_color         "${cf[17]}                                                                                ${rstf}"
-    informar_color         "${cf[ac]}                                                                                ${rstf}"
-    informar_color ""
-
-    # Informe plano
-    informar_plano "██████████████████████████████████████████████████████████████████████"
-    informar_plano "█                                                                    █"
-    informar_plano "█    Número de marcos de página : %-34s █" "[ ${numMarcosMinimo} - ${numMarcosMaximo} ] -> [ ${numMarcosMinimoInter} - ${numMarcosMaximoInter} ] : ${numeroMarcos} "
-    informar_plano "█     Tamaño de marco de página : %-34s █" "[ ${tamanoPaginaMinimo} - ${tamanoPaginaMaximo} ] -> [ ${tamanoPaginaMinimoInter} - ${tamanoPaginaMaximoInter} ] : ${tamanoPagina}"
-    informar_plano "█          Tamaño de la memoria : %-34s █" "${tamanoMemoria}"
-    informar_plano "█    Número máx de uds. para la reubicación : %-22s █" "[ ${minimoReubicacionMinimo} - ${minimoReubicacionMaximo} ] -> [ ${minimoReubicacionMinimoInter} - ${minimoReubicacionMaximoInter} ] : ${mNUR}"
-    informar_plano "█                                                                    █"
-	informar_plano "█            Número de procesos : %-34s █" "[ ${numeroProcesosMinimo} - ${numeroProcesosMaximo} ] -> [ ${numeroProcesosMinimoInter} - ${numeroProcesosMaximoInter} ] : ${numeroProcesos}"
-    informar_plano "█             Tiempo de llegada : %-34s █" "[ ${tiempoLlegadaMinimo} - ${tiempoLlegadaMaximo} ] -> [ ${tiempoLlegadaMinimoInter} - ${tiempoLlegadaMaximoInter} ]"
-	informar_plano "█           Tiempo de ejecución : %-34s █" "[ ${tiempoEjecucionMinimo} - ${tiempoEjecucionMaximo} ] -> [ ${tiempoEjecucionMinimoInter} - ${tiempoEjecucionMaximoInter} ]"
-	informar_plano "█            Mínimo estructural : %-34s █" "[ ${minimoEstructuralMinimo} - ${minimoEstructuralMaximo} ] -> [ ${minimoEstructuralMinimoInter} - ${minimoEstructuralMaximoInter} ]"
-	informar_plano "█                   Direcciones : %-34s █" "[ ${direccionMinima} - ${direccionMaxima} ] -> [ ${direccionMinimaInter} - ${direccionMaximaInter} ]"
 	informar_plano "█                                                                    █"
 	informar_plano "██████████████████████████████████████████████████████████████████████"
     informar_plano ""

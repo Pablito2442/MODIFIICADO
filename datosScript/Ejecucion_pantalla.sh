@@ -1413,7 +1413,7 @@ ej_pantalla_linea_memoria_pequena() {
             break;
         fi
         primerMarco=$(( $ultimoMarco + 1 ))
-        anchoRestante=$(( $anchoTotal - 2 ))
+        anchoRestante=$(( $anchoTotal + 1 ))
     done
     printf "\n"
 }
@@ -1541,7 +1541,7 @@ ej_pantalla_linea_tiempo() {
             break;
         fi
         primerTiempo=$(( $ultimoTiempo + 1 ))
-        anchoRestante=$(( $anchoTotal - 2 ))
+        anchoRestante=$(( $anchoTotal + 1 ))
     done
 }
 

@@ -361,8 +361,27 @@ cabecera() {
 # DES: Crea un número pseudoaleatorio y lo asigna a la variable.
 # USO: aleatorio_entre var min max
 aleatorio_entre() {
-    eval "${1}=$( shuf -i ${2}-${3} -n 1 )"
+    local rango=0
+    local random_number=0
+    if (( $2 <= 0 )) && (( $3 >= 0 )); then
+        rango=$(( -$2 + $3 ))
+        random_number=$(( $(shuf -i 0-$rango -n 1) + $2 ))
+    elif (( $2 >= 0 )) && (( $3 <= 0 )); then
+        rango=$(( $2 - $3 ))
+        random_number=$(( $(shuf -i 0-$rango -n 1) + $3 ))
+    elif (( $2 <= 0 )) && (( $3 <= 0 )); then
+        rango=$(( -$2-$3 ))
+        random_number=$(( $(shuf -i 0-$rango -n 1) + $2 + $3 ))
+    elif (( $2 > 0 )) && (( $3 > 0 )) && (( $2 > $3 )); then
+        random_number=$(shuf -i $3-$2 -n 1)
+    else
+        random_number=$(shuf -i $2-$3 -n 1)
+    fi
+
+    eval "${1}=$random_number"
+
 }
+
 
 # DES: Espera a que se pulse una tecla para continuar el programa
 pausa_tecla() {
