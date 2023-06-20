@@ -817,10 +817,7 @@ ej_ejecutar() {
 
         # Incrementar el contador del proceso
         (( pc[$enEjecucion]++ ))
-
     fi
-
-
 }
 
 source Ejecucion_pantalla.sh

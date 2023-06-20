@@ -1358,15 +1358,8 @@ datos_archivo_rangos_total() {
 	# Lista con los archivos de la carpeta de datos
     local lista=()
     # Archivo que se ha seleccionado de la lista
-    local seleccion=""
+    local seleccion="DatosRangosAleatorioTotal.txt"
     local carpeta=$carpetaRangosTotal
-	
-
-    # comprobaciones previas
-    datos_archivo_rangos_totales_comprobar
-
-    # Seleccionar archivo
-    datos_archivo_seleccionar
 
     # Hacer los informes
     datos_archivo_informes
@@ -1388,6 +1381,13 @@ datos_archivo_rangos_total() {
 
         if [[ $numeroMarcos -gt 0 ]];then
             break
+        elif [[ $numMarcosMinimo -le 0 ]];then
+            numMarcosMinimo=1
+            if [[ $numMarcosMaximo -le 0 ]];then
+                numMarcosMaximo=1
+            fi
+        elif [[ $numMarcosMaximo -le 0 ]];then
+            numMarcosMaximo=1
         fi
 
         # Mostrar la información de los rangos de memoria
@@ -1406,6 +1406,13 @@ datos_archivo_rangos_total() {
 
         if [[ $tamanoPagina -gt 0 ]];then
             break
+        elif [[ $tamanoPaginaMinimo -le 0 ]];then
+            tamanoPaginaMinimo=1
+            if [[ $tamanoPaginaMaximo -le 0 ]];then
+                tamanoPaginaMaximo=1
+            fi
+        elif [[ $tamanoPaginaMaximo -le 0 ]];then
+            tamanoPaginaMaximo=1
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1426,6 +1433,13 @@ datos_archivo_rangos_total() {
         
         if [[ $mNUR -gt 0 ]];then
             break
+        elif [[ $minimoReubicacionMinimo -le 0 ]];then
+            minimoReubicacionMinimo=1
+            if [[ $minimoReubicacionMaximo -le 0 ]];then
+                minimoReubicacionMaximo=1
+            fi
+        elif [[ $minimoReubicacionMaximo -le 0 ]];then
+            minimoReubicacionMaximo=1
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1444,6 +1458,13 @@ datos_archivo_rangos_total() {
                 
         if [[ $numeroProcesos -gt 0 ]];then
             break
+        elif [[ $numeroProcesosMinimo -le 0 ]];then
+            numeroProcesosMinimo=1
+            if [[ $numeroProcesosMaximo -le 0 ]];then
+                numeroProcesosMaximo=1
+            fi
+        elif [[ $numeroProcesosMaximo -le 0 ]];then
+            numeroProcesosMaximo=1
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1461,6 +1482,13 @@ datos_archivo_rangos_total() {
 
         if [[ $tiempoLlegadaMinimoInter -ge 0 ]] && [[ $tiempoLlegadaMaximoInter -ge 0 ]];then
             break
+        elif [[ $tiempoLlegadaMinimo -lt 0 ]];then
+            tiempoLlegadaMinimo=0
+            if [[ $tiempoLlegadaMaximo -lt 0 ]];then
+                tiempoLlegadaMaximo=0
+            fi
+        elif [[ $tiempoLlegadaMaximo -lt 0 ]];then
+            tiempoLlegadaMaximo=0
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1478,6 +1506,13 @@ datos_archivo_rangos_total() {
 
         if [[ $tiempoEjecucionMinimoInter -gt 0 ]] && [[ $tiempoEjecucionMaximoInter -gt 0 ]];then
             break
+        elif [[ $tiempoEjecucionMinimo -le 0 ]];then
+            tiempoEjecucionMinimo=1
+            if [[ $tiempoEjecucionMaximo -le 0 ]];then
+                tiempoEjecucionMaximo=1
+            fi
+        elif [[ $tiempoEjecucionMaximo -le 0 ]];then
+            tiempoEjecucionMaximo=1
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1494,11 +1529,24 @@ datos_archivo_rangos_total() {
         aleatorio_entre minimoEstructuralMaximoInter ${minimoEstructuralMinimo} ${minimoEstructuralMaximo}
 
         if [[ $minimoEstructuralMinimoInter -gt 0 ]] && [[ $minimoEstructuralMaximoInter -gt 0 ]];then
+            if [[ $minimoEstructuralMaximo -gt $numeroMarcos ]];then
+                minimoEstructuralMaximo=$numeroMarcos
+            fi
             if [[ $minimoEstructuralMaximoInter -ge $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMaximoInter -le $numeroMarcos ]];then
                 break
             elif [[ $minimoEstructuralMaximoInter -le $minimoEstructuralMinimoInter ]] && [[ $minimoEstructuralMinimoInter -lt $numeroMarcos ]];then
                 break
             fi
+        elif [[ $minimoEstructuralMinimo -le 0 ]];then
+            minimoEstructuralMinimo=1
+            if [[ $minimoEstructuralMaximo -le 0 ]];then
+                minimoEstructuralMaximo=1
+                if [[ $minimoEstructuralMaximo -gt $numeroMarcos ]];then
+                minimoEstructuralMaximo=$numeroMarcos
+            fi
+            fi
+        elif [[ $minimoEstructuralMaximo -le 0 ]];then
+            minimoEstructuralMaximo=1
         fi
             
         # Mostrar la información de los rangos de memoria
@@ -1516,6 +1564,13 @@ datos_archivo_rangos_total() {
 
         if [[ $direccionMinimaInter -gt 0 ]] && [[ $direccionMaximaInter -gt 0 ]];then
             break
+        elif [[ $direccionMinima -le 0 ]];then
+            direccionMinima=1
+            if [[ $direccionMaxima -le 0 ]];then
+                direccionMaxima=1
+            fi
+        elif [[ $direccionMaxima -le 0 ]];then
+            direccionMaxima=1
         fi
             
         # Mostrar la información de los rangos de memoria

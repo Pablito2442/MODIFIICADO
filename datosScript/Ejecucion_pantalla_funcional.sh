@@ -1270,26 +1270,26 @@ ej_pantalla_linea_memoria_pequena() {
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
     local anchoEtiquetaFinal=6
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 0)) # Anteriormente estaba con un 1
-    local contador=0
-    local senal
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 1 ))
+    local numMaxBloquesPorLinea=$(( $anchoRestante / $anchoBloque))
 
     local procesoActual=-2
     local primerMarco=0
+    local ultimoMarco=""
     local ultimoProceso=""
 
     for (( l=0; ; l++ ));do
-        # En caso de que no se pueda la informacion final al final de la linea y no haya mas marcos
-        if [ $primerMarco -eq $numeroMarcos ] && [[ $senal -eq 1 ]];then
-            printf "%${anchoEtiqueta}s${rstf} |\n"
-            printf "%${anchoEtiqueta}s${rstf} | M:"${numeroMarcos}"\n"
-            printf "%${anchoEtiqueta}s${rstf} |\n"
-        fi
 
-        # Comprueba si ya ha impreso todos los marcos de pagina
-        if [ $primerMarco -eq $numeroMarcos ];then
-            break;
+        # Calcular cuantos marcos se van a imprimir en esta linea
+        ultimoMarco=$(( $primerMarco + $numMaxBloquesPorLinea ))
+        printf "$ultimoMarco"
+        printf "\n"
+        # En caso de lineas extas
+        if [ $ultimoMarco -gt $numeroMarcos ];then
+            ultimoMarco=$numeroMarcos 
         fi
+        printf "$ultimoMarco"
+        printf "\n"
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1302,13 +1302,10 @@ ej_pantalla_linea_memoria_pequena() {
         fi
 
         ultimoProceso=-2
-        for (( m=$primerMarco; ; m++ ));do
+        for (( m=$primerMarco; m<=$(($ultimoMarco-1)); m++ ));do
             # Si el marco está vacío o es el mismo proceso
             if [ -z "${memoriaProceso[$m]}" ] || [ ${ultimoProceso} -eq ${memoriaProceso[$m]} ];then
                 printf "%${anchoBloque}s"
-                anchoRestante=$(( $anchoRestante - $anchoBloque ))
-                ((++contador))
-
                 if [ -z "${memoriaProceso[$m]}" ];then
                     ultimoProceso=-1
                 fi
@@ -1317,21 +1314,13 @@ ej_pantalla_linea_memoria_pequena() {
                 temp=${memoriaProceso[$m]}
                 printf "%s%*s" "${nombreProcesoColor[$temp]}" "$(( ${anchoBloque} - ${#nombreProceso[$temp]} ))" ""
                 ultimoProceso=${temp}
-                anchoRestante=$(( $anchoRestante - $anchoBloque ))
-                ((++contador))
-            fi
-
-            if [[ $anchoRestante -le $anchoBloque ]] || [[ $contador -eq $numeroMarcos ]] ;then
-                break
             fi
         done
 
-        if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
+        if [[ $ultimoMarco -le $((numeroMarcos-1)) ]] ;then
             printf "${rstf}\n"
-            senal=1
-        else                
+        else
             printf "${rstf}|\n"
-            senal=0
         fi
 
         #PÁGINAS
@@ -1344,7 +1333,7 @@ ej_pantalla_linea_memoria_pequena() {
             printf " "
         fi
 
-        for (( m=$primerMarco; m<$contador; m++ ));do
+        for (( m=$primerMarco; m<=$(($ultimoMarco-1)); m++ ));do
             # Poner el color
             if [ -n "${memoriaProceso[$m]}" ];then
                 temp=${memoriaProceso[$m]}
@@ -1360,7 +1349,7 @@ ej_pantalla_linea_memoria_pequena() {
             temp=${memoriaProceso[$m]}
             temp2=$(( ${pc[$temp]} - 1 ))
             if [ -n "${memoriaPagina[$m]}" ] && [ ${procesoPagina[$temp,$temp2]} -eq ${memoriaPagina[$m]} ];then
-                printf "${ft[0]}"               
+                printf "${ft[0]}"
             fi
 
             if [ -n "${memoriaProceso[$m]}" ] && [ -z "${memoriaPagina[$m]}" ];then
@@ -1372,11 +1361,12 @@ ej_pantalla_linea_memoria_pequena() {
             if [ -n "${memoriaPagina[$m]}" ] && [ ${procesoPagina[$temp,$temp2]} -eq ${memoriaPagina[$m]} ];then
                 printf "${ft[1]}"
             fi
-         
         done
 
-        if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
+        if [[ $ultimoMarco -le $((numeroMarcos-1)) ]];then
             printf "${rstf}\n"
+        # elif [[ $ultimoMarco -eq $((numeroMarcos-1)) ]];then
+
         else
             printf "${rstf}| M:"${numeroMarcos}"\n"
         fi
@@ -1393,7 +1383,7 @@ ej_pantalla_linea_memoria_pequena() {
 
         ultimoProceso=-2
 		Mini=()
-        for (( m=$primerMarco; m<$contador; m++ ));do
+        for (( m=$primerMarco; m<=$(($ultimoMarco-1)); m++ ));do
             if [ -n "${memoriaProceso[$m]}" ];then
                 procesoActual="${memoriaProceso[$m]}"
             else
@@ -1408,14 +1398,18 @@ ej_pantalla_linea_memoria_pequena() {
             fi
         done
 
-	    if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
-            printf "${rstf}\n"
+	    if [[ $ultimoMarco -le $((numeroMarcos-1)) ]];then
+            printf "${rstf}\n" 
         else
             printf "${rstf}|\n"
         fi
 
-        primerMarco=$(( $contador + 0 ))
-        anchoRestante=$(( $anchoTotal - $anchoEtiqueta ))
+        # Si se ha llegado al último marco
+        if [ $ultimoMarco -eq $numeroMarcos ];then
+            break;
+        fi
+        primerMarco=$(( $ultimoMarco  ))
+        anchoRestante=$(( $anchoTotal + 1 ))
     done
     printf "\n"
 }
@@ -1428,26 +1422,23 @@ ej_pantalla_linea_tiempo() {
     local anchoBloque=$(( $anchoGen + 1 ))
     local anchoEtiqueta=5
     local anchoEtiquetaFinal=6
-    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta )) # Anteriormente estaba con un 1
-    local contador=0
-    local senal
+    local anchoRestante=$(( $anchoTotal - $anchoEtiqueta - 1 - $anchoEtiquetaFinal))
+    local numMaxBloquesPorLinea=$(( $anchoRestante / $anchoBloque))
     
     local primerTiempo=0
+    local ultimoTiempo=""
     local ultimoProceso=""
     for (( l=0; ; l++ ));do
-        # En caso de que no se pueda la informacion final al final de la linea y no haya mas marcos
-        if [ $(($primerTiempo-1)) -eq $t ] && [[ $senal -eq 1 ]];then
-            printf "%${anchoEtiqueta}s${rstf} |\n"
-            printf "%${anchoEtiqueta}s${rstf} | T:"${t}"\n"
-            printf "%${anchoEtiqueta}s${rstf} |\n"
-        fi
 
-        # printf "$primerTiempo"
-        # printf "\t$t\n"
-        # Comprueba si ya ha impreso todos los marcos de pagina
-        if [ $(($primerTiempo-1)) -eq $t ];then
-            break;
+        # Calcular cuntos marcos se van a imprimir en esta linea
+        ultimoTiempo=$(( $primerTiempo + $numMaxBloquesPorLinea ))
+        # printf "$ultimoTiempo"
+        # printf "\n"
+        if [ $ultimoTiempo -gt $t ];then
+            ultimoTiempo=$(( $t ))
         fi
+        # printf "$ultimoTiempo"
+        # printf "\n"
 
         #PROCESOS
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1460,13 +1451,10 @@ ej_pantalla_linea_tiempo() {
         fi
 
         ultimoProceso=-2
-        for (( m=$primerTiempo; ; m++ ));do
+        for (( m=$primerTiempo; m<=$(($ultimoTiempo-1)); m++ ));do
             # Si el marco está vacío o es el mismo proceso
             if [ -z "${tiempoProceso[$m]}" ] || [ ${ultimoProceso} -eq ${tiempoProceso[$m]} ];then
                 printf "%${anchoBloque}s"
-                anchoRestante=$(( $anchoRestante - $anchoBloque ))
-                ((++contador))
-
                 if [ -z "${tiempoProceso[$m]}" ];then
                     ultimoProceso=-1
                 fi
@@ -1475,23 +1463,16 @@ ej_pantalla_linea_tiempo() {
                 temp=${tiempoProceso[$m]}
                 printf "%s%*s" "${nombreProcesoColor[$temp]}" "$(( ${anchoBloque} - ${#nombreProceso[$temp]} ))" ""
                 ultimoProceso=${temp}
-                anchoRestante=$(( $anchoRestante - $anchoBloque ))
-                ((++contador))
-            fi
-            if [[ $anchoRestante -le $anchoBloque ]] || [[ $(($contador-1)) -eq $t ]] ;then
-                break;
             fi
         done
 
-        if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
+        if [[ $ultimoTiempo -le $((t-1)) ]];then
             printf "${rstf}\n"
-            senal=1
-        else                
+        else
             printf "${rstf}|\n"
-            senal=0
         fi
 
-        # (( ++$l ))
+        (( ++$l ))
 
         #PÁGINAS
         # Imprimir la etiqueta si estamos en la primera linea
@@ -1503,7 +1484,7 @@ ej_pantalla_linea_tiempo() {
             printf " "
         fi
 
-        for (( m=$primerTiempo; m<$contador; m++ ));do
+        for (( m=$primerTiempo; m<=$(($ultimoTiempo-1)); m++ ));do
             # Poner el color
             if [ $m -eq $t ];then
                 printf "${rstf}"
@@ -1520,7 +1501,7 @@ ej_pantalla_linea_tiempo() {
             printf "%${anchoBloque}s" "${tiempoPagina[$m]}"
         done
 
-        if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
+        if [[ $ultimoTiempo -le $((t-1)) ]];then
             printf "${rstf}\n"
         else
             printf "${rstf}| T:"$t"\n"
@@ -1537,7 +1518,7 @@ ej_pantalla_linea_tiempo() {
         fi
 
         ultimoProceso=-2
-        for (( m=$primerTiempo; m<$contador; m++ ));do
+        for (( m=$primerTiempo; m<=$(($ultimoTiempo-1)); m++ ));do
 
             if [[ "$ultimoProceso" -eq "-2" || -z "${tiempoProceso[$m]}" && $ultimoProceso -ne -1 || -n "${tiempoProceso[$m]}" && "${ultimoProceso}" -ne "${tiempoProceso[$m]}" ]];then
                     printf "%${anchoBloque}s" "$m"
@@ -1550,14 +1531,18 @@ ej_pantalla_linea_tiempo() {
             fi
         done
 
-        if [[ $anchoRestante -lt $anchoEtiquetaFinal ]];then
+        if [[ $ultimoTiempo -le $((t-1)) ]];then
             printf "${rstf}\n"
         else
             printf "${rstf}|\n"
         fi
 
-        primerTiempo=$contador
-        anchoRestante=$(( $anchoTotal - $anchoEtiqueta ))
+        # Si se ha llegado al último marco
+        if [ $ultimoTiempo -eq $t ];then
+            break;
+        fi
+        primerTiempo=$(( $ultimoTiempo ))
+        anchoRestante=$(( $anchoTotal + 1 ))
     done
 }
 
