@@ -1442,8 +1442,6 @@ ej_pantalla_linea_tiempo() {
             printf "%${anchoEtiqueta}s${rstf} |\n"
         fi
 
-        # printf "$primerTiempo"
-        # printf "\t$t\n"
         # Comprueba si ya ha impreso todos los marcos de pagina
         if [ $(($primerTiempo-1)) -eq $t ];then
             break;
@@ -1478,6 +1476,7 @@ ej_pantalla_linea_tiempo() {
                 anchoRestante=$(( $anchoRestante - $anchoBloque ))
                 ((++contador))
             fi
+            
             if [[ $anchoRestante -le $anchoBloque ]] || [[ $(($contador-1)) -eq $t ]] ;then
                 break;
             fi

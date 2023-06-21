@@ -118,6 +118,7 @@ init_colores() {
         "\e[105m" #  MagentaC 15
         "\e[106m" #     CianC 16
 		"\e[47m"  #     GrisC 17
+        # "\e[100m" #    GrisO2 18
     )
 
     readonly ft=(
